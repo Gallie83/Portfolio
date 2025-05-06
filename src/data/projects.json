@@ -3,7 +3,7 @@
         {
             "name": "QuizCraft",
             "description": "QuizCraft is a virtual classroom platform that allows teachers to monitor students progress. The platform leverages AI to generate quizzes and tests based on the content of the course. QuizCraft was designed to streamline educators workflow and enhance the learning experience for students.",
-            "contribution": "I was responsible for implementing the entire authentication system through Firebase, as well as account and classroom functionality. The users would be created through Firebase and then their additional information would be stored with MongoDB. I also worked on the backend, setting up the database and creating the API endpoints for the frontend to consume.",
+            "contribution": "I was responsible for creatingthe entire authentication system through Firebase, as well as account and classroom functionality, and implemented all the relevant designs created by our UX designer. The users would be created through Firebase and then their additional information would be stored with MongoDB. I also worked on the backend, setting up the database and creating the API endpoints for the frontend to consume.",
             "url": "https://classrooms-0ay4.onrender.com/",
             "github": "https://github.com/rahulkumarbhagat-coder/Classrooms",
             "tags": ["React", "Tailwind", "Node.js", "Express", "MongoDB", "Firebase"],

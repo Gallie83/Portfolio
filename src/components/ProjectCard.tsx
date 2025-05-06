@@ -10,38 +10,43 @@ export interface Project {
   url: string;
   github: string;
   tags: string[];
-  imageUrl?: string; 
+  hackathon: boolean;
 }
 
 export function ProjectCard({ project }: { project: Project }) {
+  // Sets images for each project// Correct way to reference files in the public folder
+  const imagePath = "/assets/data-assets/" + project.name.trim().replace(/\s+/g, '') + ".png";
+  console.log("IP:", imagePath);
+
+
   return (
-    <Card className="w-full overflow-hidden flex flex-col h-full">
-      {project.imageUrl && (
-        <div className="relative w-full h-[180px]">
+    <Card className="w-full overflow-hidden flex flex-col h-full p-0">
+        <div className="relative w-full pt-[56.25%]">
           <img
-            src={project.imageUrl}
+            src={imagePath}
             alt={`${project.name} cover image`}
             className="absolute inset-0 w-full h-full object-cover"
           />
         </div>
-      )}
       <CardHeader>
         <div className="space-y-2">
           <CardTitle>{project.name}</CardTitle>
-          <CardDescription className="line-clamp-3">
+          <CardDescription className="line-clamp-2">
             {project.description}
           </CardDescription>
         </div>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col space-y-4">
+        {project.contribution && (
         <div className="space-y-2">
           <div className="text-sm font-medium text-muted-foreground">Contribution</div>
-          <p className="text-sm line-clamp-4">{project.contribution}</p>
+          <p className="text-sm line-clamp-2">{project.contribution}</p>
         </div>
+        )}
 
         <div className="space-y-2">
           <div className="text-sm font-medium text-muted-foreground">Links</div>
-          <div className="flex flex-col space-y-2">
+          <div className="flex items-center">
             <a 
               href={project.url} 
               target="_blank" 
@@ -49,8 +54,9 @@ export function ProjectCard({ project }: { project: Project }) {
               className="flex items-center gap-2 text-sm hover:underline"
             >
               <GlobeIcon className="h-4 w-4 text-muted-foreground" />
-              <span>Live Demo</span>
+              <span className="transition-transform hover:scale-105">Live Demo</span>
             </a>
+            <span className="mx-2 text-gray-400">•</span>
             <a 
               href={project.github} 
               target="_blank" 
@@ -58,7 +64,7 @@ export function ProjectCard({ project }: { project: Project }) {
               className="flex items-center gap-2 text-sm hover:underline"
             >
               <Github className="h-4 w-4 text-muted-foreground" />
-              <span>GitHub Repository</span>
+              <span className="transition-transform hover:scale-105">GitHub Repository</span>
             </a>
           </div>
         </div>

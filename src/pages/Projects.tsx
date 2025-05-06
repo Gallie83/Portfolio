@@ -44,66 +44,69 @@ function Projects() {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h2 className="text-3xl font-bold mb-8">My Projects</h2>
-      
-      <div className="flex flex-col md:flex-row gap-8">
-        {/* Skills column */}
-        <div className="w-full md:w-1/4">
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-xl font-semibold mb-4">Skills</h3>
-            <div className="space-y-2">
-              {skills.map((skill) => (
-                <button
-                  key={skill}
-                  onClick={() => handleSkillClick(skill)}
-                  className={`block w-full text-left px-3 py-2 rounded transition-colors ${
-                    selectedSkill === skill
-                      ? "bg-blue-500 text-white"
-                      : "hover:bg-gray-100"
-                  }`}
-                >
-                  {skill}
-                </button>
-              ))}
-            </div>
-            
+      <div className="mb-6">
+        <h2 className="text-3xl font-bold mb-8">My Projects</h2>
+        <span className="text-gray-500 italic text-sm">*All projects listed use Git for version control</span>
+      </div>
+        
+      {/* Skills section - now horizontal */}
+      <div className="mb-8">
+        <div className="bg-white rounded-lg shadow p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-semibold">Skills</h3>
             {selectedSkill && (
               <button
                 onClick={() => {
                   setSelectedSkill(null);
                   setFilteredProjects(projectData);
                 }}
-                className="mt-4 text-sm text-blue-500 hover:underline"
+                className="text-sm text-blue-500 hover:underline"
               >
                 Clear filter
               </button>
             )}
           </div>
+          
+          <div className="flex flex-wrap gap-2">
+            {skills.map((skill) => (
+              <button
+                key={skill}
+                onClick={() => handleSkillClick(skill)}
+                className={`px-4 py-2 rounded transition-colors ${
+                  selectedSkill === skill
+                    ? "bg-blue-500 text-white"
+                    : "bg-gray-100 hover:bg-gray-200"
+                }`}
+              >
+                {skill}
+              </button>
+            ))}
+          </div>
         </div>
+      </div>
+      
+      {/* Projects section - now full width */}
+      <div>
+        {selectedSkill && (
+          <div className="mb-6">
+            <p className="text-sm text-gray-500">
+              Showing projects using: <span className="font-medium">{selectedSkill}</span>
+            </p>
+          </div>
+        )}
         
-        {/* Projects column */}
-        <div className="w-full md:w-3/4">
-          {selectedSkill && (
-            <div className="mb-6">
-              <p className="text-sm text-gray-500">
-                Showing projects using: <span className="font-medium">{selectedSkill}</span>
-              </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          {filteredProjects.map((project, index) => (
+            <div className="transition-transform hover:scale-105 hover:cursor-pointer" key={index}>
+              <ProjectCard project={project} />
+            </div>
+          ))}
+          
+          {filteredProjects.length === 0 && (
+            <div className="col-span-full py-8 text-center text-gray-500">
+              No projects found with the selected skill.
             </div>
           )}
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {filteredProjects.map((project, index) => (
-              <div key={index}>
-                <ProjectCard project={project} />
-              </div>
-            ))}
-            
-            {filteredProjects.length === 0 && (
-              <div className="col-span-2 py-8 text-center text-gray-500">
-                No projects found with the selected skill.
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
