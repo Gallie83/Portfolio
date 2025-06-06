@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { ProjectCard, Project } from "../components/ProjectCard";
+import { ProjectModal } from "@/components/modals/ProjectModal";
 import projects from "../data/projects.json";
 
 function Projects() {
@@ -7,6 +8,7 @@ function Projects() {
   const [projectData, setProjectData] = useState<Project[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const skills = [
     "React", 
@@ -49,7 +51,7 @@ function Projects() {
         <span className="text-gray-500 italic text-sm">*All projects listed use Git for version control</span>
       </div>
         
-      {/* Skills section - now horizontal */}
+      {/* Skills section - horizontal */}
       <div className="mb-8">
         <div className="bg-white rounded-lg shadow p-6">
           <div className="flex justify-between items-center mb-4">
@@ -85,7 +87,7 @@ function Projects() {
         </div>
       </div>
       
-      {/* Projects section - now full width */}
+      {/* Projects section */}
       <div>
         {selectedSkill && (
           <div className="mb-6">
@@ -97,8 +99,11 @@ function Projects() {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredProjects.map((project, index) => (
-            <div className="transition-transform hover:scale-105 hover:cursor-pointer" key={index}>
-              <ProjectCard project={project} />
+            <div 
+              className="transition-transform hover:scale-105 hover:cursor-pointer" 
+              key={index}
+              onClick={() => setSelectedProject(project)}>
+                <ProjectCard project={project} />
             </div>
           ))}
           
@@ -109,6 +114,14 @@ function Projects() {
           )}
         </div>
       </div>
+
+      {selectedProject && (
+        <ProjectModal 
+          project={selectedProject}
+          isOpen={true}
+          onClose={() => setSelectedProject(null)}
+        />
+      )}
     </div>
   );
 }

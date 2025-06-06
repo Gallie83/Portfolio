@@ -14,7 +14,7 @@ export interface Project {
 }
 
 export function ProjectCard({ project }: { project: Project }) {
-  // Sets images for each project// Correct way to reference files in the public folder
+  // Sets images for each project
   const imagePath = "/assets/data-assets/" + project.name.trim().replace(/\s+/g, '') + ".png";
   console.log("IP:", imagePath);
 
@@ -37,12 +37,6 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
       </CardHeader>
       <CardContent className="flex-grow flex flex-col space-y-4">
-        {project.contribution && (
-        <div className="space-y-2">
-          <div className="text-sm font-medium text-muted-foreground">Contribution</div>
-          <p className="text-sm line-clamp-2">{project.contribution}</p>
-        </div>
-        )}
 
         <div className="space-y-2">
           <div className="text-sm font-medium text-muted-foreground">Links</div>
