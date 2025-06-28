@@ -63,15 +63,13 @@ export function ProjectCard({ project }: { project: Project }) {
           </div>
         </div>
 
-        <div className="mt-auto pt-4">
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 my-auto pb-4">
             {project.tags.map((tag, index) => (
               <Badge key={index} variant="secondary" className="text-xs">
                 {tag}
               </Badge>
             ))}
           </div>
-        </div>
       </CardContent>
     </Card>
   )
