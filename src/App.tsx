@@ -1,3 +1,4 @@
+import ParallaxHomepage from "./pages/ParallaxHomepage"
 import Projects from "./pages/Projects"
 import Contact from "./pages/Contact"
 
@@ -5,8 +6,9 @@ function App() {
 
   return (
     <>
-      <Projects />
-      <Contact />
+      <ParallaxHomepage />
+      {/* <Projects />
+      <Contact /> */}
     </>
   )
 }

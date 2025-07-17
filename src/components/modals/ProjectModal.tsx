@@ -86,7 +86,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               
               <button 
                 onClick={onClose}
-                className="text-gray-400 hover:text-gray-600 hover:bg-gray-200 rounded-full p-2 transition-all duration-200 ml-4"
+                className="text-gray-400 hover:text-gray-600 hover:bg-gray-200 hover:cursor-pointer rounded-full p-2 transition-all duration-200 ml-4"
               >
                 ✕
               </button>

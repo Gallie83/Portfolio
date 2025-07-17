@@ -2,6 +2,22 @@ import { useState, useEffect } from "react";
 import { ProjectCard, Project } from "../components/ProjectCard";
 import { ProjectModal } from "@/components/modals/ProjectModal";
 import projects from "../data/projects.json";
+import { Button } from "@/components/ui/button"
+import { 
+  FaReact, 
+  FaNodeJs, 
+  FaPython, 
+  FaBootstrap 
+} from 'react-icons/fa';
+import { 
+  SiExpress, 
+  SiMongodb, 
+  SiPostgresql, 
+  SiDjango, 
+  SiTypescript, 
+  SiTailwindcss,
+  SiBlockchaindotcom
+} from 'react-icons/si';
 
 function Projects() {
 
@@ -10,18 +26,19 @@ function Projects() {
   const [selectedSkill, setSelectedSkill] = useState<string | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
-  const skills = [
-    "React", 
-    "Node.js", 
-    "Express", 
-    "MongoDB", 
-    "PostgreSQL", 
-    "Django", 
-    "TypeScript", 
-    "Tailwind", 
-    "Bootstrap",
-    "Blockchain"
-  ]
+const skills = [
+  { name: "React", icon: FaReact, color: "#61DAFB" },
+  { name: "Node.js", icon: FaNodeJs, color: "#339933" },
+  { name: "Express", icon: SiExpress, color: "#000000" },
+  { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
+  { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+  { name: "Python", icon: FaPython, color: "#3776ab" },
+  { name: "Django", icon: SiDjango, color: "#092E20" },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+  { name: "Tailwind", icon: SiTailwindcss, color: "#06B6D4" },
+  { name: "Bootstrap", icon: FaBootstrap, color: "#7952B3" },
+  { name: "Blockchain", icon: SiBlockchaindotcom, color: "#F7931A" }
+];
 
   useEffect(() => {
     // Set initial projects data
@@ -69,19 +86,25 @@ function Projects() {
             )}
           </div>
           
-          <div className="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <button
-                key={skill}
-                onClick={() => handleSkillClick(skill)}
-                className={`px-4 py-2 rounded transition-colors ${
-                  selectedSkill === skill
-                    ? "bg-blue-500 text-white"
+          <div className="flex flex-wrap gap-2"> 
+            {skills.map(({ name, icon: Icon, color }) => (
+              <Button
+                key={name}
+                onClick={() => handleSkillClick(name)}
+                className={`px-4 py-2 text-black rounded-2xl hover:cursor-pointer transition-colors ${
+                  selectedSkill === name
+                    ? "bg-black text-white"
                     : "bg-gray-100 hover:bg-gray-200"
                 }`}
               >
-                {skill}
-              </button>
+                <Icon 
+                  className="w-5 h-5" 
+                  style={{ 
+                    color: selectedSkill === name ? 'white' : color 
+                  }}
+                />
+                {name}
+              </Button>
             ))}
           </div>
         </div>
@@ -92,7 +115,7 @@ function Projects() {
         {selectedSkill && (
           <div className="mb-6">
             <p className="text-sm text-gray-500">
-              Showing projects using: <span className="font-medium">{selectedSkill}</span>
+              Showing projects built using: <span className="font-medium">{selectedSkill}</span>
             </p>
           </div>
         )}

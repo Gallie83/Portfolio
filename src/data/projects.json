@@ -23,7 +23,7 @@
             "description": "Best Buds is a full-stack Django e-commerce application I built for a fictional florist shop. The website features a complete online store with Stripe payment integration, user authentication, and a shopping cart system. Users can browse products, leave reviews, read blog posts, and securely complete purchases with email confirmations. The platform includes admin functionality for product and content management, deployed on Heroku with AWS S3 for media storage. This project demonstrates my ability to build comprehensive e-commerce solutions with real-world payment processing and cloud deployment.",
             "url": "",
             "github": "https://github.com/Gallie83/Chainwork-Payment",
-            "tags": ["Django", "Bootstrap", "AWS", "PostgreSQL"],
+            "tags": ["Django", "Python", "Bootstrap", "AWS", "PostgreSQL"],
             "hackathon": false
         },
         {
@@ -31,7 +31,7 @@
             "description": "Shannon Muay Thai Academy is a full-stack Django appication that I built for my local kickboxing gym in Ireland. The website contains a booking platform where users can register accounts and schedule private training sessions, as well as serving as an informational hub for the gym. The website features user authentication, dynamic availability checking that prevents double-bookings, and a complete CRUD booking management system. Users can select dates, view only available time slots, and manage their upcoming sessions with edit and delete functionality. This project holds special significance as I've trained at this gym since it opened, allowing me to create a meaningful solution that directly benefits the community I'm part of.",
             "url": "",
             "github": "https://github.com/Gallie83/PP4-Django",
-            "tags": ["Django", "Bootstrap", "PostgreSQL"],
+            "tags": ["Django", "Python", "Bootstrap", "PostgreSQL"],
             "hackathon": false
         }
     ]
