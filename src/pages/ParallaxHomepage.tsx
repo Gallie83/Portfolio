@@ -1,36 +1,35 @@
-import { Parallax, ParallaxLayer } from '@react-spring/parallax'
+import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
+import { useRef, useState, useEffect } from 'react'
 import About from './About'
 import Projects from './Projects'
 import Contact from "./Contact"
-import { useEffect, useState } from 'react';
 
 function ParallaxHomepage() {
 
-  
-  const [isVisible, setIsVisible] = useState(true);
+  const parallaxRef = useRef<IParallax>(null)
+const [isVisible, setIsVisible] = useState(true)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScroll = window.scrollY;
-      const shouldBeVisible = currentScroll < window.innerHeight
+useEffect(() => {
+  const element = parallaxRef.current
+  if (!element) return
 
-      console.log('Scroll:', currentScroll, 'ViewHeight:', window.innerHeight,'Visible:', shouldBeVisible)
+  // IParallax has a container property that gives us the actual DOM element
+  const container = element.container.current
+  if (!container) return
 
-      setIsVisible(shouldBeVisible)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true})
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
-  if(!isVisible) {
-    return null
+  const handleScroll = () => {
+    console.log('Scroll top:', container.scrollTop)
+    setIsVisible(container.scrollTop < window.innerHeight)
   }
+
+  container.addEventListener('scroll', handleScroll, { passive: true })
+  return () => container.removeEventListener('scroll', handleScroll)
+}, [])
 
   
   return (
     <>
-      <Parallax pages={4} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
+      <Parallax ref={parallaxRef} pages={4} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
         {/* Sky background */}
         <ParallaxLayer offset={0} speed={0.1}>
           <div className="fixed left-0 top-0 h-[65%] w-full bg-[url('/assets/parallax-assets/BG.svg')] bg-cover"></div>
@@ -56,8 +55,10 @@ function ParallaxHomepage() {
         </ParallaxLayer>
 
         {/* Name heading */}
-        <ParallaxLayer offset={0} speed={-0.8}>
-          <div className="absolute left-0 top-0 h-full w-full">
+        <ParallaxLayer offset={0} speed={-1}>
+      <div 
+        className={`absolute left-0 top-0 h-full w-full transition-opacity duration-75 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      >
             <h1 className="absolute text-7xl text-center top-[10%] w-full text-white drop-shadow-lg" style={{fontFamily: 'Ephesis'}}>
               Kevin Gallagher
             </h1>
