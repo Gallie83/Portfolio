@@ -19,7 +19,7 @@ useEffect(() => {
 
   const handleScroll = () => {
     console.log('Scroll top:', container.scrollTop)
-    setIsVisible(container.scrollTop < window.innerHeight)
+    setIsVisible(container.scrollTop < (window.screen.height * 0.7))
   }
 
   container.addEventListener('scroll', handleScroll, { passive: true })
@@ -29,7 +29,7 @@ useEffect(() => {
   
   return (
     <>
-      <Parallax ref={parallaxRef} pages={4} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
+      <Parallax ref={parallaxRef} pages={4} style={{ top: '0', left: '0' }} className='animation bg-[#cccccc]'>
         {/* Sky background */}
         <ParallaxLayer offset={0} speed={0.1}>
           <div className="fixed left-0 top-0 h-[65%] w-full bg-[url('/assets/parallax-assets/BG.svg')] bg-cover"></div>
@@ -56,13 +56,13 @@ useEffect(() => {
 
         {/* Name heading */}
         <ParallaxLayer offset={0} speed={-1}>
-      <div 
-        className={`absolute left-0 top-0 h-full w-full transition-opacity duration-75 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-      >
-            <h1 className="absolute text-7xl text-center top-[10%] w-full text-white drop-shadow-lg" style={{fontFamily: 'Ephesis'}}>
-              Kevin Gallagher
-            </h1>
-          </div>
+          {isVisible && (
+            <div className="absolute left-0 top-0 h-full w-full">
+              <h1 className="absolute text-7xl text-center top-[10%] w-full text-white drop-shadow-lg" style={{fontFamily: 'Ephesis'}}>
+                Kevin Gallagher
+              </h1>
+            </div>
+          )}
         </ParallaxLayer>
 
         {/* More mountains */}
@@ -90,8 +90,10 @@ useEffect(() => {
         </ParallaxLayer>
 
         {/* About section */}
-        <ParallaxLayer offset={1} speed={1} className='bg-[#7a271b]'>
-          <About />
+        <ParallaxLayer offset={1} speed={1}>
+          <div className="relative z-50 bg-white min-h-screen">
+            <About />
+          </div>
         </ParallaxLayer>
 
         {/* Projects section */}
