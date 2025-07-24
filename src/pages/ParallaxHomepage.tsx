@@ -7,28 +7,27 @@ import Contact from "./Contact"
 function ParallaxHomepage() {
 
   const parallaxRef = useRef<IParallax>(null)
-const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(true)
 
-useEffect(() => {
-  const element = parallaxRef.current
-  if (!element) return
+  useEffect(() => {
+    const element = parallaxRef.current
+    if (!element) return
 
-  // IParallax has a container property that gives us the actual DOM element
-  const container = element.container.current
-  if (!container) return
+    // IParallax has a container property that gives us the actual DOM element
+    const container = element.container.current
+    if (!container) return
 
-  const handleScroll = () => {
-    console.log('Scroll top:', container.scrollTop)
-    setIsVisible(container.scrollTop < (window.screen.height * 0.7))
-  }
+    const handleScroll = () => {
+      console.log('Scroll top:', container.scrollTop)
+      setIsVisible(container.scrollTop < (window.screen.height * 0.6))
+    }
 
-  container.addEventListener('scroll', handleScroll, { passive: true })
-  return () => container.removeEventListener('scroll', handleScroll)
-}, [])
+    container.addEventListener('scroll', handleScroll, { passive: true })
+    return () => container.removeEventListener('scroll', handleScroll)
+  }, [])
 
   
   return (
-    <>
       <Parallax ref={parallaxRef} pages={4} style={{ top: '0', left: '0' }} className='animation bg-[#cccccc]'>
         {/* Sky background */}
         <ParallaxLayer offset={0} speed={0.1}>
@@ -97,16 +96,15 @@ useEffect(() => {
         </ParallaxLayer>
 
         {/* Projects section */}
-        <ParallaxLayer offset={2} speed={1}>
+        <ParallaxLayer offset={1.99} speed={1}>
           <Projects />
         </ParallaxLayer>
 
         {/* Contact Section */}
-        <ParallaxLayer offset={3} speed={1}>
+        <ParallaxLayer offset={2.99} speed={1}>
           <Contact />
         </ParallaxLayer>
       </Parallax>
-    </> 
   )
 }
 

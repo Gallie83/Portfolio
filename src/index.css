@@ -3,6 +3,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.force-scroll-height {
+  height: 400vh !important;
+  max-height: 400vh !important;
+}
+.force-scroll-height > div {
+  height: 400vh !important;
+  max-height: 400vh !important;
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
