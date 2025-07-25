@@ -26,9 +26,20 @@ function ParallaxHomepage() {
     return () => container.removeEventListener('scroll', handleScroll)
   }, [])
 
+useEffect(() => {
+  const element = parallaxRef.current
+  if (!element?.container?.current) return
+
+  const container = element.container.current
+  console.log('Scroll height:', container.scrollHeight)
+  console.log('Client height:', container.clientHeight) 
+  console.log('Expected height (4 pages):', window.innerHeight * 4)
+}, [])
+
   
   return (
-      <Parallax ref={parallaxRef} pages={4} style={{ top: '0', left: '0' }} className='animation bg-[#cccccc]'>
+    // TODO: Add dynamic page sizing depending on users screen size
+      <Parallax ref={parallaxRef} pages={3.5} style={{ top: '0', left: '0' }} className='animation bg-[#cccccc]'>
         {/* Sky background */}
         <ParallaxLayer offset={0} speed={0.1}>
           <div className="fixed left-0 top-0 h-[65%] w-full bg-[url('/assets/parallax-assets/BG.svg')] bg-cover"></div>
@@ -101,7 +112,7 @@ function ParallaxHomepage() {
         </ParallaxLayer>
 
         {/* Contact Section */}
-        <ParallaxLayer offset={2.99} speed={1}>
+        <ParallaxLayer offset={2.9} speed={1}>
           <Contact />
         </ParallaxLayer>
       </Parallax>
