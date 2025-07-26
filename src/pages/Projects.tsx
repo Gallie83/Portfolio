@@ -140,9 +140,9 @@ const skills = [
 
       {selectedProject && (
         <ProjectModal 
-          project={selectedProject}
-          isOpen={true}
-          onClose={() => setSelectedProject(null)}
+        project={selectedProject}
+        isOpen={true}
+        onClose={() => setSelectedProject(null)}
         />
       )}
     </div>

@@ -26,17 +26,6 @@ function ParallaxHomepage() {
     container.addEventListener('scroll', handleScroll, { passive: true })
     return () => container.removeEventListener('scroll', handleScroll)
   }, [])
-
-useEffect(() => {
-  const element = parallaxRef.current
-  if (!element?.container?.current) return
-
-  const container = element.container.current
-  console.log('Scroll height:', container.scrollHeight)
-  console.log('Client height:', container.clientHeight) 
-  console.log('Expected height (4 pages):', window.innerHeight * 4)
-}, [])
-
   
   return (
     // TODO: Add dynamic page sizing depending on users screen size
@@ -65,7 +54,8 @@ useEffect(() => {
           <div className="absolute left-0 top-[5%] h-[110vh] z-30 w-full bg-[url('/assets/parallax-assets/mountain4.svg')] bg-cover"></div>
         </ParallaxLayer>
 
-        <ParallaxLayer offset={0} sticky={{start: 0, end: 4}}>
+        {/* Sidenav */}
+        <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: 4}}>
           <Navbar />
         </ParallaxLayer>
 
