@@ -1,5 +1,6 @@
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { useRef, useState, useEffect } from 'react'
+import Navbar from '@/components/Navbar'
 import About from './About'
 import Projects from './Projects'
 import Contact from "./Contact"
@@ -39,7 +40,7 @@ useEffect(() => {
   
   return (
     // TODO: Add dynamic page sizing depending on users screen size
-      <Parallax ref={parallaxRef} pages={3.5} style={{ top: '0', left: '0' }} className='animation bg-[#cccccc]'>
+      <Parallax ref={parallaxRef} pages={3.5} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
         {/* Sky background */}
         <ParallaxLayer offset={0} speed={0.1}>
           <div className="fixed left-0 top-0 h-[65%] w-full bg-[url('/assets/parallax-assets/BG.svg')] bg-cover"></div>
@@ -62,6 +63,10 @@ useEffect(() => {
         </ParallaxLayer>
         <ParallaxLayer offset={0} speed={0.25}>
           <div className="absolute left-0 top-[5%] h-[110vh] z-30 w-full bg-[url('/assets/parallax-assets/mountain4.svg')] bg-cover"></div>
+        </ParallaxLayer>
+
+        <ParallaxLayer offset={0} sticky={{start: 0, end: 4}}>
+          <Navbar />
         </ParallaxLayer>
 
         {/* Name heading */}
@@ -101,7 +106,7 @@ useEffect(() => {
 
         {/* About section */}
         <ParallaxLayer offset={1} speed={1}>
-          <div className="relative z-50 bg-white min-h-screen">
+          <div className="relative z-50 min-h-screen">
             <About />
           </div>
         </ParallaxLayer>
