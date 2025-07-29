@@ -8,8 +8,10 @@ import Contact from "./Contact"
 function ParallaxHomepage() {
 
   const parallaxRef = useRef<IParallax>(null)
+
   const [isVisible, setIsVisible] = useState(true)
 
+  // Make Title heading disappear behind mountains
   useEffect(() => {
     const element = parallaxRef.current
     if (!element) return
@@ -26,6 +28,11 @@ function ParallaxHomepage() {
     container.addEventListener('scroll', handleScroll, { passive: true })
     return () => container.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // TODO: add custom scrolling animation with slower scroll
+  const scrollToSection = (offset: number) => {
+    parallaxRef.current?.scrollTo(offset);
+  }
   
   return (
     // TODO: Add dynamic page sizing depending on users screen size
@@ -56,7 +63,7 @@ function ParallaxHomepage() {
 
         {/* Sidenav */}
         <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: 4}}>
-          <Navbar />
+          <Navbar onNavigate={scrollToSection} />
         </ParallaxLayer>
 
         {/* Name heading */}
@@ -91,7 +98,7 @@ function ParallaxHomepage() {
           <div className="absolute left-0 top-0 h-[125vh] w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover filter brightness-125 saturate-100"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={0} speed={0.5}>
-          <div className="absolute left-0 top-0 h-[145vh] w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover filter brightness-125 saturate-100"></div>
+          <div className="absolute left-0 top-0 h-[145vh] w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover filter brightness-125 saturate-100 mb-4"></div>
         </ParallaxLayer>
 
         {/* About section */}
@@ -102,7 +109,7 @@ function ParallaxHomepage() {
         </ParallaxLayer>
 
         {/* Projects section */}
-        <ParallaxLayer offset={1.99} speed={1}>
+        <ParallaxLayer offset={1.9} speed={1}>
           <Projects />
         </ParallaxLayer>
 
