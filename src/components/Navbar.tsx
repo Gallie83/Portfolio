@@ -34,7 +34,7 @@ function Navbar({ onNavigate }: NavbarProps) {
             </button>
           </li>
           <li className="relative">
-            <button onClick ={() => onNavigate(1.9)} 
+            <button onClick ={() => onNavigate(1.5)} 
               className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center gap-3">
               <FolderOpen size={24}/>
               <span className="absolute left-0 top-0 opacity-0 group-hover:opacity-100 px-2 py-1 rounded transition-all duration-500 ease-out transform translate-x-0 group-hover:translate-x-8 whitespace-nowrap">
@@ -43,7 +43,7 @@ function Navbar({ onNavigate }: NavbarProps) {
             </button>
           </li>
           <li className="relative">
-            <button onClick ={() => onNavigate(2.9)} 
+            <button onClick ={() => onNavigate(2.4)} 
               className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center gap-3">
               <Mail size={24}/>
               <span className="absolute left-0 top-0 hover:backdrop-blur-3xl opacity-0 group-hover:opacity-100 px-2 py-1 rounded transition-all duration-500 ease-out transform translate-x-0 group-hover:translate-x-8 whitespace-nowrap">

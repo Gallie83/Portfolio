@@ -4,12 +4,14 @@ import Navbar from '@/components/Navbar'
 import About from './About'
 import Projects from './Projects'
 import Contact from "./Contact"
-
+ 
 function ParallaxHomepage() {
 
   const parallaxRef = useRef<IParallax>(null)
-
   const [isVisible, setIsVisible] = useState(true)
+
+  const [currentScrollPosition, setCurrentScrollPosition] = useState(0);
+
 
   // Make Title heading disappear behind mountains
   useEffect(() => {
@@ -29,11 +31,30 @@ function ParallaxHomepage() {
     return () => container.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // TODO: add custom scrolling animation with slower scroll
-  const scrollToSection = (offset: number) => {
-    parallaxRef.current?.scrollTo(offset);
-  }
-  
+  // TODO: Fix scroll animations 'bounce' that occurs halfway through the scroll
+  const scrollToSection = (targetOffset: number) => {
+    const duration = 1500;
+    const startTime = Date.now();
+    const startOffset = currentScrollPosition;
+    
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      const currentOffset = startOffset + (targetOffset - startOffset) * progress;
+      parallaxRef.current?.scrollTo(currentOffset);
+      
+      if (progress === 1) {
+        setCurrentScrollPosition(targetOffset);
+        return;
+      }
+      
+      requestAnimationFrame(animate);
+    };
+    
+    animate();
+  };
+    
   return (
     // TODO: Add dynamic page sizing depending on users screen size
       <Parallax ref={parallaxRef} pages={3.5} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
@@ -67,7 +88,7 @@ function ParallaxHomepage() {
         </ParallaxLayer>
 
         {/* Name heading */}
-        <ParallaxLayer offset={0} speed={-1}>
+        <ParallaxLayer offset={0} speed={-1.2}>
           {isVisible && (
             <div className="absolute left-0 top-0 h-full w-full">
               <h1 className="absolute text-7xl text-center top-[10%] w-full text-white drop-shadow-lg" style={{fontFamily: 'Ephesis'}}>
