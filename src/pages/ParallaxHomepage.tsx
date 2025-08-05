@@ -8,23 +8,24 @@ import Contact from "./Contact"
 function ParallaxHomepage() {
 
   const parallaxRef = useRef<IParallax>(null)
-  const [isVisible, setIsVisible] = useState(true)
+  const [nameOpacity, setNameOpacity] = useState(1)
+  const isScrollingRef = useRef(false) // Track if we're programmatically scrolling
 
-  const [currentScrollPosition, setCurrentScrollPosition] = useState(0);
-
-
-  // Make Title heading disappear behind mountains
+  // Make Title heading change color to match background after scrolling behind mountains
   useEffect(() => {
     const element = parallaxRef.current
     if (!element) return
 
-    // IParallax has a container property that gives us the actual DOM element
     const container = element.container.current
     if (!container) return
 
     const handleScroll = () => {
-      console.log('Scroll top:', container.scrollTop)
-      setIsVisible(container.scrollTop < (window.screen.height * 0.6))
+      const scrollThreshold = window.innerHeight * 0.6
+      const scrollProgress = Math.min(container.scrollTop / scrollThreshold, 1)
+      
+      // Fade from to background color
+      const opacity = 1 - scrollProgress
+      setNameOpacity(opacity)
     }
 
     container.addEventListener('scroll', handleScroll, { passive: true })
@@ -32,27 +33,25 @@ function ParallaxHomepage() {
   }, [])
 
   // TODO: Fix scroll animations 'bounce' that occurs halfway through the scroll
-  const scrollToSection = (targetOffset: number) => {
-    const duration = 1500;
-    const startTime = Date.now();
-    const startOffset = currentScrollPosition;
-    
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      const currentOffset = startOffset + (targetOffset - startOffset) * progress;
-      parallaxRef.current?.scrollTo(currentOffset);
-      
-      if (progress === 1) {
-        setCurrentScrollPosition(targetOffset);
-        return;
-      }
-      
-      requestAnimationFrame(animate);
-    };
-    
-    animate();
+  const scrollToSection = ( section: string ) => {
+    const sectionMap = {
+      'home': 0,
+      'about': 1, 
+      'projects': 1.5,
+      'contact': 2.4
+    }
+
+    const targetOffset = sectionMap[section as keyof typeof sectionMap]
+
+    if(targetOffset !== undefined && parallaxRef.current) {
+      isScrollingRef.current = true
+
+      parallaxRef.current.scrollTo(targetOffset)
+
+      setTimeout(() => {
+        isScrollingRef.current = false
+      }, 6000)
+    }
   };
     
   return (
@@ -77,9 +76,7 @@ function ParallaxHomepage() {
         {/* Mountain */}
         <ParallaxLayer offset={0} speed={0.2}>
           <div className="absolute left-0 top-[5%] h-[110vh] z-10 w-full bg-[url('/assets/parallax-assets/mountain5.svg')] bg-cover"></div>
-        </ParallaxLayer>
-        <ParallaxLayer offset={0} speed={0.25}>
-          <div className="absolute left-0 top-[5%] h-[110vh] z-30 w-full bg-[url('/assets/parallax-assets/mountain4.svg')] bg-cover"></div>
+          <div className="absolute left-0 top-[5%] h-[110vh] z-10 w-full bg-[url('/assets/parallax-assets/mountain4.svg')] bg-cover"></div>
         </ParallaxLayer>
 
         {/* Sidenav */}
@@ -89,24 +86,22 @@ function ParallaxHomepage() {
 
         {/* Name heading */}
         <ParallaxLayer offset={0} speed={-1.2}>
-          {isVisible && (
-            <div className="absolute left-0 top-0 h-full w-full">
-              <h1 className="absolute text-7xl text-center top-[10%] w-full text-white drop-shadow-lg" style={{fontFamily: 'Ephesis'}}>
+            <div className="absolute left-0 top-0 h-full w-full z-20">
+              <h1 
+                className="absolute text-7xl text-center top-[10%] w-full text-white drop-shadow-lg" 
+                style={{fontFamily: 'Ephesis', color: `rgba(255, 255, 255, ${nameOpacity})`}}>
                 Kevin Gallagher
               </h1>
             </div>
-          )}
         </ParallaxLayer>
 
         {/* More mountains */}
         <ParallaxLayer offset={0} speed={0.3}>
           <div className="absolute left-0 top-[5%] h-[110vh] z-40 w-full bg-[url('/assets/parallax-assets/mountain3.svg')] bg-cover"></div>
-        </ParallaxLayer>
-        <ParallaxLayer offset={0} speed={0.35}>
-          <div className="absolute left-0 top-[5%] h-[110vh] z-50 w-full bg-[url('/assets/parallax-assets/mountain2.svg')] bg-cover"></div>
+          <div className="absolute left-0 top-[5%] h-[110vh] z-40 w-full bg-[url('/assets/parallax-assets/mountain2.svg')] bg-cover"></div>
         </ParallaxLayer>
         <ParallaxLayer offset={0} speed={0.4}>
-          <div className="absolute left-0 top-[5%] h-[105vh] z-60 w-full bg-[url('/assets/parallax-assets/mountain1.svg')] bg-cover"></div>
+          <div className="absolute left-0 top-[5%] h-[105vh] z-40 w-full bg-[url('/assets/parallax-assets/mountain1.svg')] bg-cover"></div>
         </ParallaxLayer>
 
         {/* Sea and boats */}
@@ -117,8 +112,7 @@ function ParallaxHomepage() {
         {/* Beach layers (doubled) */}
         <ParallaxLayer offset={0} speed={0.5}>
           <div className="absolute left-0 top-0 h-[125vh] w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover filter brightness-125 saturate-100"></div>
-        </ParallaxLayer>
-        <ParallaxLayer offset={0} speed={0.5}>
+
           <div className="absolute left-0 top-0 h-[145vh] w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover filter brightness-125 saturate-100 mb-4"></div>
         </ParallaxLayer>
 
