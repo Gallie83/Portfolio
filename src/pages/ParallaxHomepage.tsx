@@ -4,12 +4,15 @@ import Navbar from '@/components/Navbar'
 import About from './About'
 import Projects from './Projects'
 import Contact from "./Contact"
+
+import { gsap } from "gsap"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"
+gsap.registerPlugin(ScrollToPlugin)
  
 function ParallaxHomepage() {
 
   const parallaxRef = useRef<IParallax>(null)
   const [nameOpacity, setNameOpacity] = useState(1)
-  const isScrollingRef = useRef(false) // Track if we're programmatically scrolling
 
   // Make Title heading change color to match background after scrolling behind mountains
   useEffect(() => {
@@ -20,10 +23,10 @@ function ParallaxHomepage() {
     if (!container) return
 
     const handleScroll = () => {
-      const scrollThreshold = window.innerHeight * 0.6
+      const scrollThreshold = window.innerHeight * 0.7
       const scrollProgress = Math.min(container.scrollTop / scrollThreshold, 1)
       
-      // Fade from to background color
+      // Fade to background color
       const opacity = 1 - scrollProgress
       setNameOpacity(opacity)
     }
@@ -32,27 +35,26 @@ function ParallaxHomepage() {
     return () => container.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // TODO: Fix scroll animations 'bounce' that occurs halfway through the scroll
-  const scrollToSection = ( section: string ) => {
+  // Slower scroll animation for Navbar links
+ const scrollToSection = (section: string) => {
     const sectionMap = {
       'home': 0,
       'about': 1, 
       'projects': 1.5,
       'contact': 2.4
     }
-
+    
     const targetOffset = sectionMap[section as keyof typeof sectionMap]
-
-    if(targetOffset !== undefined && parallaxRef.current) {
-      isScrollingRef.current = true
-
-      parallaxRef.current.scrollTo(targetOffset)
-
-      setTimeout(() => {
-        isScrollingRef.current = false
-      }, 6000)
+    
+    if (targetOffset !== undefined && parallaxRef.current) {
+      const container = parallaxRef.current.container.current
+      gsap.to(container, {
+        scrollTop: targetOffset * window.innerHeight,
+        duration: 3,
+        ease: "power2.inOut"
+      })
     }
-  };
+}
     
   return (
     // TODO: Add dynamic page sizing depending on users screen size
