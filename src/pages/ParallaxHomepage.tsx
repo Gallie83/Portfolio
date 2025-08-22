@@ -8,30 +8,26 @@ import Contact from "./Contact"
 import { gsap } from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 gsap.registerPlugin(ScrollToPlugin)
-
+ 
 function ParallaxHomepage() {
   const parallaxRef = useRef<IParallax>(null)
   const [nameOpacity, setNameOpacity] = useState(1)
-  const [screenType, setScreenType] = useState('desktop')
+  const [screenType, setScreenType] = useState('laptop')
 
-  // Track screen dimensions and set breakpoints
+  // Track desktop screen sizes only (no mobile/tablet)
   useEffect(() => {
     const updateScreenType = () => {
       const width = window.innerWidth
       const height = window.innerHeight
       
-      if (width < 768) {
-        setScreenType('mobile')
-      } else if (width >= 768 && width < 1024) {
-        setScreenType('tablet')
-      } else if (width >= 1024 && width < 1440) {
-        setScreenType('laptop') // Local ThinkPad baseline
+      if (width >= 1024 && width < 1440) {
+        setScreenType('laptop') // Your ThinkPad baseline
       } else if (width >= 1440 && width < 1920) {
         setScreenType('desktop')
       } else if (width >= 1920 && height >= 1080) {
-        setScreenType('large') // Nest Hub Max, 4K, etc.
+        setScreenType('large') // 4K+ screens
       } else {
-        setScreenType('desktop')
+        setScreenType('laptop') // Default to laptop baseline
       }
     }
 
@@ -41,111 +37,57 @@ function ParallaxHomepage() {
     return () => window.removeEventListener('resize', updateScreenType)
   }, [])
 
-  // Manual positioning adjustments per screen type to maintain visual consistency
-  const getBreakpointStyles = () => {
+  const getDesktopStyles = () => {
     switch (screenType) {
-      case 'mobile':
-        return {
-          mountainTop: '-5%',
-          sunScale: 85,
-          nameTop: '8%',
-          landscapeHeight: '120vh',
-          skyHeight: '60%',
-          cloudTop1: '-1%',
-          cloudTop2: '0%',
-          // Hybrid approach - different strategy per element
-          sunStrategy: 'contain', 
-          cloudStrategy: 'cover-center', 
-          mountainStrategy: 'cover-center', 
-          seaStrategy: 'cover-center', 
-          beachStrategy: 'cover' 
-        }
-      
-      case 'tablet':
-        return {
-          mountainTop: '2%',
-          sunScale: 95,
-          nameTop: '9%',
-          landscapeHeight: '115vh',
-          skyHeight: '63%',
-          cloudTop1: '0%',
-          cloudTop2: '1%',
-          sunStrategy: 'cover',
-          cloudStrategy: 'cover',
-          mountainStrategy: 'cover',
-          seaStrategy: 'cover',
-          beachStrategy: 'cover'
-        }
-      
       case 'laptop':
         return {
+          skyHeight: '65%',
+          sunScale: 'scale-105',
           mountainTop: '5%',
-          sunScale: 105,
           nameTop: '10%',
           landscapeHeight: '110vh',
-          skyHeight: '65%',
           cloudTop1: '1%',
-          cloudTop2: '2%',
-          sunStrategy: 'cover',
-          cloudStrategy: 'cover',
-          mountainStrategy: 'cover',
-          seaStrategy: 'cover',
-          beachStrategy: 'cover'
+          cloudTop2: '2%'
         }
       
-      case 'desktop':
+      case 'desktop': // Slight adjustments for larger screens
         return {
+          skyHeight: '68%',
+          sunScale: 'scale-110',
           mountainTop: '8%',
-          sunScale: 110,
           nameTop: '12%',
           landscapeHeight: '115vh',
-          skyHeight: '68%',
           cloudTop1: '2%',
-          cloudTop2: '3%',
-          sunStrategy: 'cover',
-          cloudStrategy: 'cover',
-          mountainStrategy: 'cover',
-          seaStrategy: 'cover',
-          beachStrategy: 'cover'
+          cloudTop2: '3%'
         }
       
-      case 'large': // Nest Hub Max, 4K+
+      case 'large': // 4K+ adjustments
         return {
+          skyHeight: '70%',
+          sunScale: 'scale-120',
           mountainTop: '12%',
-          sunScale: 120,
           nameTop: '15%',
           landscapeHeight: '125vh',
-          skyHeight: '70%',
           cloudTop1: '4%',
-          cloudTop2: '5%',
-          sunStrategy: 'cover',
-          cloudStrategy: 'cover',
-          mountainStrategy: 'cover',
-          seaStrategy: 'cover',
-          beachStrategy: 'cover'
+          cloudTop2: '5%'
         }
       
       default:
         return {
+          skyHeight: '65%',
+          sunScale: 'scale-105',
           mountainTop: '5%',
-          sunScale: 105,
           nameTop: '10%',
           landscapeHeight: '110vh',
-          skyHeight: '65%',
           cloudTop1: '1%',
-          cloudTop2: '2%',
-          sunStrategy: 'cover',
-          cloudStrategy: 'cover',
-          mountainStrategy: 'cover',
-          seaStrategy: 'cover',
-          beachStrategy: 'cover'
+          cloudTop2: '2%'
         }
     }
   }
 
-  const styles = getBreakpointStyles()
+  const styles = getDesktopStyles()
 
-  // Title opacity effect
+  // Make Title heading change color to match background after scrolling behind mountains
   useEffect(() => {
     const element = parallaxRef.current
     if (!element) return
@@ -154,17 +96,19 @@ function ParallaxHomepage() {
     if (!container) return
 
     const handleScroll = () => {
-      const scrollThreshold = window.innerHeight * (screenType === 'mobile' ? 0.6 : 0.7)
+      const scrollThreshold = window.innerHeight * 0.7
       const scrollProgress = Math.min(container.scrollTop / scrollThreshold, 1)
+      
+      // Fade to background color
       const opacity = 1 - scrollProgress
       setNameOpacity(opacity)
     }
 
     container.addEventListener('scroll', handleScroll, { passive: true })
     return () => container.removeEventListener('scroll', handleScroll)
-  }, [screenType])
+  }, [])
 
-  // Smooth scroll navigation
+  // Slower scroll animation for Navbar links
   const scrollToSection = (section: string) => {
     const sectionMap = {
       'home': 0,
@@ -184,45 +128,34 @@ function ParallaxHomepage() {
       })
     }
   }
-
-  // Responsive font size based on screen type
-  const getNameFontSize = () => {
-    if (screenType === 'mobile') return 'text-4xl sm:text-5xl'
-    return 'text-7xl' // Keep original desktop size for all larger screens
-  }
     
   return (
     <Parallax ref={parallaxRef} pages={3.5} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
       {/* Sky background */}
       <ParallaxLayer offset={0} speed={0.1}>
         <div 
-          className="fixed left-0 top-0 w-full bg-[url('/assets/parallax-assets/BG.svg')] bg-cover"
+          className="fixed left-0 top-0 w-full bg-[url('/assets/parallax-assets/BG.svg')] bg-cover bg-center"
           style={{ height: styles.skyHeight }}
         />
       </ParallaxLayer>
 
-      {/* Sun */}
+      {/* Sun and clouds */}
       <ParallaxLayer offset={0} speed={0}>
         <div 
-          className="absolute left-0 top-0 w-full bg-[url('/assets/parallax-assets/sun.svg')] bg-cover"
-          style={{ 
-            height: styles.landscapeHeight,
-            transform: `scale(${styles.sunScale / 100})`
-          }}
+          className={`absolute ${styles.sunScale} left-0 top-0 w-full bg-[url('/assets/parallax-assets/sun.svg')] bg-cover bg-center`}
+          style={{ height: styles.landscapeHeight }}
         />
       </ParallaxLayer>
-
-      {/* Clouds */}
       <ParallaxLayer offset={0} speed={0.1}>
         <div 
-          className="absolute left-0 w-full bg-[url('/assets/parallax-assets/cloud1.svg')] bg-cover"
+          className="absolute left-0 w-full bg-[url('/assets/parallax-assets/cloud1.svg')] bg-cover bg-center"
           style={{ 
             top: styles.cloudTop1,
             height: styles.landscapeHeight 
           }}
         />
         <div 
-          className="absolute left-0 w-full bg-[url('/assets/parallax-assets/cloud2.svg')] bg-cover"
+          className="absolute left-0 w-full bg-[url('/assets/parallax-assets/cloud2.svg')] bg-cover bg-center"
           style={{ 
             top: styles.cloudTop2,
             height: styles.landscapeHeight 
@@ -230,27 +163,27 @@ function ParallaxHomepage() {
         />
       </ParallaxLayer>
 
-      {/* Back Mountains */}
+      {/* Mountains */}
       <ParallaxLayer offset={0} speed={0.2}>
         <div 
-          className="absolute left-0 z-10 w-full bg-[url('/assets/parallax-assets/mountain5.svg')] bg-cover"
+          className="absolute left-0 z-10 w-full bg-[url('/assets/parallax-assets/mountain5.svg')] bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight
+            height: styles.landscapeHeight 
           }}
         />
       </ParallaxLayer>
       <ParallaxLayer offset={0} speed={0.25}>
         <div 
-          className="absolute left-0 z-10 w-full bg-[url('/assets/parallax-assets/mountain4.svg')] bg-cover"
+          className="absolute left-0 z-10 w-full bg-[url('/assets/parallax-assets/mountain4.svg')] bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight
+            height: styles.landscapeHeight 
           }}
         />
       </ParallaxLayer>
 
-      {/* Navigation */}
+      {/* Sidenav */}
       <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: 4}}>
         <Navbar onNavigate={scrollToSection} />
       </ParallaxLayer>
@@ -259,12 +192,11 @@ function ParallaxHomepage() {
       <ParallaxLayer offset={0} speed={-1.2}>
         <div className="absolute left-0 top-0 h-full w-full z-20">
           <h1 
-            className={`absolute ${getNameFontSize()} text-center w-full text-white drop-shadow-lg px-4`}
+            className="absolute text-7xl text-center w-full text-white drop-shadow-lg" 
             style={{
               fontFamily: 'Ephesis', 
               color: `rgba(255, 255, 255, ${nameOpacity})`,
-              top: styles.nameTop,
-              lineHeight: screenType === 'mobile' ? '1.1' : '1.2'
+              top: styles.nameTop
             }}
           >
             Kevin Gallagher
@@ -272,35 +204,29 @@ function ParallaxHomepage() {
         </div>
       </ParallaxLayer>
 
-      {/* Mid Mountains */}
+      {/* More mountains */}
       <ParallaxLayer offset={0} speed={0.3}>
         <div 
-          className="absolute left-0 z-40 w-full bg-[url('/assets/parallax-assets/mountain3.svg')] bg-cover"
+          className="absolute left-0 z-40 w-full bg-[url('/assets/parallax-assets/mountain3.svg')] bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight
+            height: styles.landscapeHeight 
           }}
         />
         <div 
-          className="absolute left-0 z-40 w-full bg-[url('/assets/parallax-assets/mountain2.svg')] bg-cover"
+          className="absolute left-0 z-40 w-full bg-[url('/assets/parallax-assets/mountain2.svg')] bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight
+            height: styles.landscapeHeight 
           }}
         />
       </ParallaxLayer>
-
-      {/* Front Mountain*/}
       <ParallaxLayer offset={0} speed={0.4}>
         <div 
-          className="absolute left-0 z-40 w-full"
+          className="absolute left-0 z-40 w-full bg-[url('/assets/parallax-assets/mountain1.svg')] bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight,
-            backgroundImage: "url('/assets/parallax-assets/mountain1.svg')",
-            backgroundSize: 'cover',
-            backgroundPosition: styles.mountainStrategy === 'cover-center' ? 'center' : 'left top',
-            backgroundRepeat: 'no-repeat'
+            height: styles.landscapeHeight 
           }}
         />
       </ParallaxLayer>
@@ -308,49 +234,44 @@ function ParallaxHomepage() {
       {/* Sea and boats */}
       <ParallaxLayer offset={0} speed={0.4}>
         <div 
-          className="absolute left-0 w-full"
+          className="absolute left-0 w-full bg-[url('/assets/parallax-assets/sea.svg')] bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight,
-            backgroundImage: "url('/assets/parallax-assets/sea.svg')",
-            backgroundSize: 'cover',
-            backgroundPosition: styles.seaStrategy === 'cover-center' ? 'center' : 'left top',
-            backgroundRepeat: 'no-repeat'
+            height: styles.landscapeHeight 
           }}
         />
       </ParallaxLayer>
 
-      {/* Beach layer */}
+      {/* Beach layers (doubled) */}
       <ParallaxLayer offset={0} speed={0.5}>
         <div 
-          className="absolute left-0 top-0 w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover filter brightness-125 saturate-100"
-          style={{ 
-            height: `calc(${styles.landscapeHeight} + 15vh)`
-          }}
+          className="absolute left-0 top-0 w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover bg-center filter brightness-125 saturate-100"
+          style={{ height: `calc(${styles.landscapeHeight} + 15vh)` }}
         />
         <div 
-          className="absolute left-0 top-0 w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover filter brightness-125 saturate-100 mb-4"
-          style={{ 
-            height: `calc(${styles.landscapeHeight} + 35vh)`
-          }}
+          className="absolute left-0 top-0 w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover bg-center filter brightness-125 saturate-100 mb-4"
+          style={{ height: `calc(${styles.landscapeHeight} + 35vh)` }}
         />
       </ParallaxLayer>
 
-      {/* About section */}
+      {/* Combined Content Sections - Single ParallaxLayer */}
       <ParallaxLayer offset={1} speed={1}>
-        <div className="relative z-50 min-h-screen">
-          <About />
+        <div className="relative z-50 bg-[#983122]">
+          {/* About section */}
+          <section className="min-h-screen">
+            <About />
+          </section>
+
+          {/* Projects section */}
+          <section className="min-h-screen">
+            <Projects />
+          </section>
+
+          {/* Contact Section */}
+          <section className="min-h-screen">
+            <Contact />
+          </section>
         </div>
-      </ParallaxLayer>
-
-      {/* Projects section */}
-      <ParallaxLayer offset={1.9} speed={1}>
-        <Projects />
-      </ParallaxLayer>
-
-      {/* Contact Section */}
-      <ParallaxLayer offset={2.9} speed={1}>
-        <Contact />
       </ParallaxLayer>
     </Parallax>
   )

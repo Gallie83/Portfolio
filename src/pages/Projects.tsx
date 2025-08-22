@@ -62,7 +62,7 @@ const skills = [
   };
 
   return (
-    <div className="mx-20 px-4 py-12 mt-5">
+    <div className="mx-20 px-4 py-12 mb-5">
       <div className="mb-6">
         <h2 className="text-3xl font-bold mb-8">My Projects</h2>
         <span className="text-gray-500 italic text-sm">*All projects listed use Git for version control</span>

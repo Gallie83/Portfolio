@@ -1,10 +1,12 @@
 import ParallaxHomepage from "./pages/ParallaxHomepage"
 
+
 function App() {
 
   return (
     <>
       <ParallaxHomepage />
+
     </>
   )
 }

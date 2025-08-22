@@ -1,7 +1,7 @@
 
 function About() {
   return (
-    <div className="flex justify-between p-8 md:p-12">
+    <div className="flex justify-between p-8 mb-5 md:p-12">
       {/* Left section */}
       <div className="flex-1 flex flex-col justify-center items-center p-3">
         <div className="flex justify-center mb-4">
