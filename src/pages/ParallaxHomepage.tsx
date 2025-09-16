@@ -13,22 +13,33 @@ function ParallaxHomepage() {
   const parallaxRef = useRef<IParallax>(null)
   const [nameOpacity, setNameOpacity] = useState(1)
   const [screenType, setScreenType] = useState('laptop')
+  const [totalPages, setTotalPages] = useState(3.4)
 
-  // Track desktop screen sizes only (no mobile/tablet)
+  // Screen type detection with proper sizing
   useEffect(() => {
     const updateScreenType = () => {
       const width = window.innerWidth
       const height = window.innerHeight
       
+      let newScreenType = 'laptop'
+      let newTotalPages = 3.4
+      
       if (width >= 1024 && width < 1440) {
-        setScreenType('laptop') // Your ThinkPad baseline
+        newScreenType = 'laptop' // ThinkPad dimensions
+        newTotalPages = 3.4
       } else if (width >= 1440 && width < 1920) {
-        setScreenType('desktop')
+        newScreenType = 'desktop'
+        newTotalPages = 3.45
       } else if (width >= 1920 && height >= 1080) {
-        setScreenType('large') // 4K+ screens
+        newScreenType = 'large' // 4K+ screens (NestHub Max equivalent)
+        newTotalPages = 3.5
       } else {
-        setScreenType('laptop') // Default to laptop baseline
+        newScreenType = 'laptop' 
+        newTotalPages = 3.4
       }
+      
+      setScreenType(newScreenType)
+      setTotalPages(newTotalPages)
     }
 
     window.addEventListener('resize', updateScreenType)
@@ -47,10 +58,14 @@ function ParallaxHomepage() {
           nameTop: '10%',
           landscapeHeight: '110vh',
           cloudTop1: '1%',
-          cloudTop2: '2%'
+          cloudTop2: '2%',
+          contentOffset: 1,
+          aboutOffset: 1,
+          projectsOffset: 1.5,
+          contactOffset: 2.4
         }
       
-      case 'desktop': // Slight adjustments for larger screens
+      case 'desktop': 
         return {
           skyHeight: '68%',
           sunScale: 'scale-110',
@@ -58,10 +73,14 @@ function ParallaxHomepage() {
           nameTop: '12%',
           landscapeHeight: '115vh',
           cloudTop1: '2%',
-          cloudTop2: '3%'
+          cloudTop2: '3%',
+          contentOffset: 1,
+          aboutOffset: 1,
+          projectsOffset: 1.6,
+          contactOffset: 2.45
         }
       
-      case 'large': // 4K+ adjustments
+      case 'large': // NestHub Max and similar large screens
         return {
           skyHeight: '70%',
           sunScale: 'scale-120',
@@ -69,7 +88,11 @@ function ParallaxHomepage() {
           nameTop: '15%',
           landscapeHeight: '125vh',
           cloudTop1: '4%',
-          cloudTop2: '5%'
+          cloudTop2: '5%',
+          contentOffset: 1,
+          aboutOffset: 1,
+          projectsOffset: 1.7,
+          contactOffset: 2.5
         }
       
       default:
@@ -80,7 +103,11 @@ function ParallaxHomepage() {
           nameTop: '10%',
           landscapeHeight: '110vh',
           cloudTop1: '1%',
-          cloudTop2: '2%'
+          cloudTop2: '2%',
+          contentOffset: 1,
+          aboutOffset: 1,
+          projectsOffset: 1.6,
+          contactOffset: 2.4
         }
     }
   }
@@ -108,13 +135,13 @@ function ParallaxHomepage() {
     return () => container.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Slower scroll animation for Navbar links
+  // Updated scroll animation with screen-specific offsets
   const scrollToSection = (section: string) => {
     const sectionMap = {
       'home': 0,
-      'about': 1, 
-      'projects': 1.5,
-      'contact': 2.4
+      'about': styles.aboutOffset, 
+      'projects': styles.projectsOffset,
+      'contact': styles.contactOffset
     }
     
     const targetOffset = sectionMap[section as keyof typeof sectionMap]
@@ -130,7 +157,7 @@ function ParallaxHomepage() {
   }
     
   return (
-    <Parallax ref={parallaxRef} pages={3.5} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
+    <Parallax ref={parallaxRef} pages={totalPages} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
       {/* Sky background */}
       <ParallaxLayer offset={0} speed={0.1}>
         <div 
@@ -163,7 +190,7 @@ function ParallaxHomepage() {
         />
       </ParallaxLayer>
 
-      {/* Mountains */}
+      {/* Back mountains */}
       <ParallaxLayer offset={0} speed={0.2}>
         <div 
           className="absolute left-0 z-10 w-full bg-[url('/assets/parallax-assets/mountain5.svg')] bg-cover bg-center"
@@ -184,7 +211,7 @@ function ParallaxHomepage() {
       </ParallaxLayer>
 
       {/* Sidenav */}
-      <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: 4}}>
+      <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: totalPages}}>
         <Navbar onNavigate={scrollToSection} />
       </ParallaxLayer>
 
@@ -204,7 +231,7 @@ function ParallaxHomepage() {
         </div>
       </ParallaxLayer>
 
-      {/* More mountains */}
+      {/* Front mountains */}
       <ParallaxLayer offset={0} speed={0.3}>
         <div 
           className="absolute left-0 z-40 w-full bg-[url('/assets/parallax-assets/mountain3.svg')] bg-cover bg-center"
@@ -254,21 +281,21 @@ function ParallaxHomepage() {
         />
       </ParallaxLayer>
 
-      {/* Combined Content Sections - Single ParallaxLayer */}
-      <ParallaxLayer offset={1} speed={1}>
-        <div className="relative z-50 bg-[#983122]">
+      {/* Content Sections */}
+      <ParallaxLayer offset={styles.contentOffset} speed={1}>
+        <div className="relative z-50 bg-gradient-to-b bg-[#983122]">
           {/* About section */}
-          <section className="min-h-screen">
+          <section id="about" className="min-h-screen py-8">
             <About />
           </section>
 
           {/* Projects section */}
-          <section className="min-h-screen">
+          <section id="projects" className="min-h-screen py-8">
             <Projects />
           </section>
 
           {/* Contact Section */}
-          <section className="min-h-screen">
+          <section id="contact" className="min-h-screen pb-8">
             <Contact />
           </section>
         </div>
