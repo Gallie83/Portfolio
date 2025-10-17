@@ -59,8 +59,8 @@ function ParallaxHomepage() {
           landscapeHeight: '110vh',
           cloudTop1: '1%',
           cloudTop2: '2%',
-          contentOffset: 1,
-          aboutOffset: 1,
+          contentOffset: 1.05,
+          aboutOffset: 1.05,
           projectsOffset: 1.5,
           contactOffset: 2.4
         }
@@ -74,8 +74,8 @@ function ParallaxHomepage() {
           landscapeHeight: '115vh',
           cloudTop1: '2%',
           cloudTop2: '3%',
-          contentOffset: 1,
-          aboutOffset: 1,
+          contentOffset: 1.05,
+          aboutOffset: 1.05,
           projectsOffset: 1.6,
           contactOffset: 2.45
         }
@@ -89,8 +89,8 @@ function ParallaxHomepage() {
           landscapeHeight: '125vh',
           cloudTop1: '4%',
           cloudTop2: '5%',
-          contentOffset: 1,
-          aboutOffset: 1,
+          contentOffset: 1.05,
+          aboutOffset: 1.05,
           projectsOffset: 1.7,
           contactOffset: 2.5
         }
@@ -104,8 +104,8 @@ function ParallaxHomepage() {
           landscapeHeight: '110vh',
           cloudTop1: '1%',
           cloudTop2: '2%',
-          contentOffset: 1,
-          aboutOffset: 1,
+          contentOffset: 1.05,
+          aboutOffset: 1.05,
           projectsOffset: 1.6,
           contactOffset: 2.4
         }
@@ -218,16 +218,28 @@ function ParallaxHomepage() {
       {/* Name heading */}
       <ParallaxLayer offset={0} speed={-1.2}>
         <div className="absolute left-0 top-0 h-full w-full z-20">
-          <h1 
-            className="absolute text-7xl text-center w-full text-white drop-shadow-lg" 
-            style={{
-              fontFamily: 'Ephesis', 
-              color: `rgba(255, 255, 255, ${nameOpacity})`,
-              top: styles.nameTop
-            }}
+          <div 
+            className="absolute w-full text-center flex flex-col items-center"
+            style={{ top: styles.nameTop }}
           >
-            Kevin Gallagher
-          </h1>
+            <h1 
+              className="text-7xl text-white drop-shadow-lg" 
+              style={{
+                fontFamily: 'Ephesis', 
+                color: `rgba(255, 255, 255, ${nameOpacity})`,
+              }}
+            >
+              Kevin Gallagher
+            </h1>
+            <p 
+              className="text-2xl text-white drop-shadow-md mt-2"
+              style={{
+                color: `rgba(255, 255, 255, ${nameOpacity})`,
+              }}
+            >
+              Full-Stack Developer
+            </p>
+          </div>
         </div>
       </ParallaxLayer>
 
@@ -283,7 +295,7 @@ function ParallaxHomepage() {
 
       {/* Content Sections */}
       <ParallaxLayer offset={styles.contentOffset} speed={1}>
-        <div className="relative z-50 bg-gradient-to-b bg-[#983122]">
+        <div className="relative z-50">
           {/* About section */}
           <section id="about" className="min-h-screen py-8">
             <About />

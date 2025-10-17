@@ -62,64 +62,62 @@ const skills = [
   };
 
   return (
-    <div className="mx-20 px-4 py-12 mb-5">
-      <div className="mb-6">
-        <h2 className="text-3xl font-bold mb-8">My Projects</h2>
-        <span className="text-gray-500 italic text-sm">*All projects listed use Git for version control</span>
-      </div>
+    <div className="min-h-screen px-6 py-6 md:px-12">
+      <div className="max-w-7xl mx-auto">
         
-      {/* Skills section - horizontal */}
-      <div className="mb-8">
-        <div className="bg-white rounded-lg shadow p-6">
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-xl font-semibold">Skills</h3>
-            {selectedSkill && (
-              <button
-                onClick={() => {
-                  setSelectedSkill(null);
-                  setFilteredProjects(projectData);
-                }}
-                className="text-sm text-blue-500 hover:underline"
-              >
-                Clear filter
-              </button>
-            )}
-          </div>
-          
-          <div className="flex flex-wrap gap-2"> 
-            {skills.map(({ name, icon: Icon, color }) => (
-              <Button
-                key={name}
-                onClick={() => handleSkillClick(name)}
-                className={`px-4 py-2 text-black rounded-2xl hover:cursor-pointer transition-colors ${
-                  selectedSkill === name
-                    ? "bg-black text-white"
-                    : "bg-gray-100 hover:bg-gray-200"
-                }`}
-              >
-                <Icon 
-                  className="w-5 h-5" 
-                  style={{ 
-                    color: selectedSkill === name ? 'white' : color 
+        {/* Header Section */}
+        <div className="mb-5">
+          <h1 className="text-5xl font-bold text-white mb-4">My Projects</h1>
+          <div className="h-1 w-24 bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] rounded-full mb-3"></div>
+          <span className="text-white/80 italic text-sm">*All projects listed use Git for version control</span>
+        </div>
+        
+        {/* Skills section */}
+        <div className="mb-5">
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-orange-100">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-[#983122] flex items-center gap-2">
+                <span className="w-1.5 h-6 bg-[#FB8B24] rounded-full"></span>
+                Skills
+              </h2>
+              {selectedSkill && (
+                <button
+                  onClick={() => {
+                    setSelectedSkill(null);
+                    setFilteredProjects(projectData);
                   }}
-                />
-                {name}
-              </Button>
-            ))}
+                  className="text-sm text-[#FB8B24] hover:text-[#FF6B35] font-medium transition-colors"
+                >
+                  Clear filter
+                </button>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-3"> 
+              {skills.map(({ name, icon: Icon, color }) => (
+                <Button
+                  key={name}
+                  onClick={() => handleSkillClick(name)}
+                  className={`px-4 py-2 rounded-lg hover:cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md ${
+                    selectedSkill === name
+                      ? "bg-[#983122] text-white hover:bg-[#7a271b]"
+                      : "bg-white text-gray-700 border border-orange-200 hover:bg-orange-50 hover:text-[#983122] hover:border-[#FB8B24]"
+                  }`}
+                >
+                  <Icon 
+                    className="w-5 h-5" 
+                    style={{ 
+                      color: selectedSkill === name ? 'white' : color 
+                    }}
+                  />
+                  {name}
+                </Button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-      
-      {/* Projects section */}
-      <div>
-        {selectedSkill && (
-          <div className="mb-6">
-            <p className="text-sm text-gray-500">
-              Showing projects built using: <span className="font-medium">{selectedSkill}</span>
-            </p>
-          </div>
-        )}
         
+        {/* Projects section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
           {filteredProjects.map((project, index) => (
             <div 
@@ -131,20 +129,20 @@ const skills = [
           ))}
           
           {filteredProjects.length === 0 && (
-            <div className="col-span-full py-8 text-center text-gray-500">
+            <div className="col-span-full py-8 text-center text-gray-600">
               No projects found with the selected skill.
             </div>
           )}
         </div>
-      </div>
 
-      {selectedProject && (
-        <ProjectModal 
-        project={selectedProject}
-        isOpen={true}
-        onClose={() => setSelectedProject(null)}
-        />
-      )}
+        {selectedProject && (
+          <ProjectModal 
+          project={selectedProject}
+          isOpen={true}
+          onClose={() => setSelectedProject(null)}
+          />
+        )}
+      </div>
     </div>
   );
 }
