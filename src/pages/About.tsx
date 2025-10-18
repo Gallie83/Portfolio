@@ -1,7 +1,7 @@
 function About() {
   return (
     <div className="h-screen flex items-center px-6 md:px-12">
-      <div className="max-w-6xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full">
 
         <h1 className="text-5xl font-bold text-white mb-4">About Me</h1>
         <div className="h-1 w-24 bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] rounded-full mb-3"></div>
@@ -82,7 +82,7 @@ function About() {
                   <span className="text-xs text-gray-500 whitespace-nowrap">Jan 2024 - Jan 2025</span>
                 </div>
                 <p className="text-xs text-gray-600 mt-1">
-                  Collaborated with a development team to build full-stack applications using the MERN stack and Jest testing.
+                  Collaborated with a development team to build full-stack applications using the MERN stack with Jest for unit testing.
                 </p>
               </div>
             </div>

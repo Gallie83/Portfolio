@@ -38,18 +38,18 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center" 
         onClick={onClose}>
           <Card 
-            className="flex flex-col p-0 w-full max-w-6xl max-h-[95vh] overflow-hidden shadow-2xl" 
+            className="flex flex-col p-0 border-[#983122] w-full max-w-6xl max-h-[95vh] overflow-hidden shadow-2xl" 
             onClick={(e) => e.stopPropagation()}>
             {/* Header with title, links, tags and close button */}
-            <CardHeader className="border-b bg-gradient-to-r from-gray-50 to-gray-100 p-3 !pb-0">
+            <CardHeader className="bg-gradient-to-r from-[#FB8B24] to-[#983122] p-3 !pb-0">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <CardTitle className="text-4xl font-bold text-gray-800 mb-4">{project.name}</CardTitle>
+                  <CardTitle className="text-4xl font-bold text-white mb-4">{project.name}</CardTitle>
                   
                   <div className="flex flex-col sm:flex-row gap-6">
                   {/* Links */}
                   <div className="space-y-2">
-                    <div className="flex items-center">
+                    <div className="flex text-white items-center">
                       {/* Only display Live Demo link if website is live */}
                       {project.url && (
                         <a 
@@ -58,18 +58,18 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-sm hover:underline"
                           >
-                          <GlobeIcon className="h-4 w-4 text-muted-foreground" />
+                          <GlobeIcon className="h-4 w-4" />
                           <span className="transition-transform hover:scale-105">Live Demo</span>
                         </a>
                       )}
-                      {project.url && (<span className="mx-2 text-gray-400">•</span>)}
+                      {project.url && (<span className="mx-2">•</span>)}
                       <a 
                         href={project.github} 
                         target="_blank" 
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-sm hover:underline"
                       >
-                        <Github className="h-4 w-4 text-muted-foreground" />
+                        <Github className="h-4 w-4" />
                         <span className="transition-transform hover:scale-105">GitHub Repository</span>
                       </a>
                     </div>
@@ -78,7 +78,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 items-center">
                       {project.tags.map((tag, index) => (
-                        <Badge key={index} variant="secondary" className="text-sm py-1 px-3 bg-gray-200 text-gray-700">
+                        <Badge key={index} variant="secondary" className="text-sm py-1 px-3 bg-white/90 text-[#983122] border border-orange-200 hover:text-white hover:bg-[#983122]">
                           {tag}
                         </Badge>
                       ))}
@@ -88,7 +88,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 
                 <button 
                   onClick={onClose}
-                  className="text-gray-400 hover:text-gray-600 hover:bg-gray-200 hover:cursor-pointer rounded-full p-2 transition-all duration-200 ml-4"
+                  className="text-white/80 hover:text-white hover:bg-white/20 hover:cursor-pointer rounded-full p-2 transition-all duration-200 ml-4"
                 >
                   ✕
                 </button>
@@ -106,20 +106,20 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 />
                 
                 {/* Sliding description overlay */}
-                <div className={`absolute bottom-0 left-0 right-0 bg-white bg-opacity-95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out ${
+                <div className={`absolute bottom-0 left-0 right-0 text-white bg-[#983122] bg-opacity-95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out ${
                   showDescription ? 'translate-y-0' : 'translate-y-full'
                 }`}>
                   <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
                     {/* Description */}
                     <div className="space-y-2">
-                      <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2">Description</h3>
-                      <p className="text-gray-600 leading-relaxed">{project.description}</p>
+                      <h3 className="text-lg font-semibold border-b border-gray-200 pb-2">Description</h3>
+                      <p className="leading-relaxed">{project.description}</p>
                     </div>
 
                     {/* Contribution (if exists) */}
                     {project.contribution && (
                       <div className="space-y-2">
-                        <h3 className="text-lg font-semibold text-gray-800 border-b border-gray-200 pb-2">My Contribution</h3>
+                        <h3 className="text-lg font-semibold border-b border-gray-200 pb-2">My Contribution</h3>
                         <p className="text-gray-600 leading-relaxed">{project.contribution}</p>
                       </div>
                     )}
@@ -129,11 +129,11 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 {/* Description toggle button - positioned to stay above the overlay */}
                 <button
                   onClick={() => setShowDescription(!showDescription)}
-                  className={`absolute left-1/2 transform -translate-x-1/2 bg-white hover:bg-gray-50 px-6 py-3 rounded-full shadow-xl border border-gray-200 transition-all duration-300 hover:scale-110 hover:cursor-pointer flex items-center gap-2 z-20 ${
+                  className={`absolute left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] hover:from-[#FF6B35] hover:to-[#FB8B24] text-white px-6 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-110 hover:cursor-pointer flex items-center gap-2 z-20 font-semibold ${
                     showDescription ? 'top-[0vh]' : 'top-[60vh]'
                   }`}
                 >
-                  <span className="font-medium text-gray-800">
+                  <span className="font-medium text-white">
                     {showDescription ? 'Hide Details' : 'Show Details'}
                   </span>
                   {showDescription ? <ChevronDown className="h-4 w-4" /> : <ChevronUp className="h-4 w-4" />}
