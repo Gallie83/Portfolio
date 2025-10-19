@@ -13,7 +13,7 @@ function ParallaxHomepage() {
   const parallaxRef = useRef<IParallax>(null)
   const [nameOpacity, setNameOpacity] = useState(1)
   const [screenType, setScreenType] = useState('laptop')
-  const [totalPages, setTotalPages] = useState(3.4)
+  const [totalPages, setTotalPages] = useState(3.5)
 
   // Screen type detection with proper sizing
   useEffect(() => {
@@ -22,20 +22,20 @@ function ParallaxHomepage() {
       const height = window.innerHeight
       
       let newScreenType = 'laptop'
-      let newTotalPages = 3.4
+      let newTotalPages = 3.5
       
       if (width >= 1024 && width < 1440) {
         newScreenType = 'laptop' // ThinkPad dimensions
-        newTotalPages = 3.4
+        newTotalPages = 3.5
       } else if (width >= 1440 && width < 1920) {
         newScreenType = 'desktop'
-        newTotalPages = 3.45
+        newTotalPages = 3.55
       } else if (width >= 1920 && height >= 1080) {
         newScreenType = 'large' // 4K+ screens (NestHub Max equivalent)
-        newTotalPages = 3.5
+        newTotalPages = 3.6
       } else {
         newScreenType = 'laptop' 
-        newTotalPages = 3.4
+        newTotalPages = 3.5
       }
       
       setScreenType(newScreenType)

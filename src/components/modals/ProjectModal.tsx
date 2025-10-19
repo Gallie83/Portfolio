@@ -112,15 +112,15 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                   <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
                     {/* Description */}
                     <div className="space-y-2">
-                      <h3 className="text-lg font-semibold border-b border-gray-200 pb-2">Description</h3>
+                      <h3 className="text-lg font-bold border-b border-gray-200 pb-2">Description</h3>
                       <p className="leading-relaxed">{project.description}</p>
                     </div>
 
                     {/* Contribution (if exists) */}
                     {project.contribution && (
                       <div className="space-y-2">
-                        <h3 className="text-lg font-semibold border-b border-gray-200 pb-2">My Contribution</h3>
-                        <p className="text-gray-600 leading-relaxed">{project.contribution}</p>
+                        <h3 className="text-lg font-bold border-b border-gray-200 pb-2">My Contribution</h3>
+                        <p className="leading-relaxed">{project.contribution}</p>
                       </div>
                     )}
                   </div>
