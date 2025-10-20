@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge"
 import { GlobeIcon, Github, ChevronUp, ChevronDown } from "lucide-react"
 import Portal from "../Portal"
 
+const basePath = import.meta.env.BASE_URL
+
 interface ProjectModalProps {
   project: Project,
   isOpen: boolean,
@@ -29,7 +31,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   if(!project || !isOpen) return null;
 
   // Sets images for each project
-  const imagePath = "/assets/data-assets/" + project.name.trim().replace(/\s+/g, '') + ".png";
+  const imagePath = basePath + "assets/data-assets/" + project.name.trim().replace(/\s+/g, '') + ".png";
   console.log("IP:", imagePath);
 
   return (

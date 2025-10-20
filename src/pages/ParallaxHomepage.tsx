@@ -8,6 +8,8 @@ import Contact from "./Contact"
 import { gsap } from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 gsap.registerPlugin(ScrollToPlugin)
+
+const basePath = import.meta.env.BASE_URL
  
 function ParallaxHomepage() {
   const parallaxRef = useRef<IParallax>(null)
@@ -161,31 +163,39 @@ function ParallaxHomepage() {
       {/* Sky background */}
       <ParallaxLayer offset={0} speed={0.1}>
         <div 
-          className="fixed left-0 top-0 w-full bg-[url('/assets/parallax-assets/BG.svg')] bg-cover bg-center"
-          style={{ height: styles.skyHeight }}
+          className="fixed left-0 top-0 w-full bg-cover bg-center"
+          style={{ 
+            height: styles.skyHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/BG.svg)`
+          }}
         />
       </ParallaxLayer>
 
       {/* Sun and clouds */}
       <ParallaxLayer offset={0} speed={0}>
         <div 
-          className={`absolute ${styles.sunScale} left-0 top-0 w-full bg-[url('/assets/parallax-assets/sun.svg')] bg-cover bg-center`}
-          style={{ height: styles.landscapeHeight }}
+          className={`absolute ${styles.sunScale} left-0 top-0 w-full bg-cover bg-center`}
+          style={{ 
+            height: styles.landscapeHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/sun.svg)`
+          }}
         />
       </ParallaxLayer>
       <ParallaxLayer offset={0} speed={0.1}>
         <div 
-          className="absolute left-0 w-full bg-[url('/assets/parallax-assets/cloud1.svg')] bg-cover bg-center"
+          className="absolute left-0 w-full bg-cover bg-center"
           style={{ 
             top: styles.cloudTop1,
-            height: styles.landscapeHeight 
+            height: styles.landscapeHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/cloud1.svg)`
           }}
         />
         <div 
-          className="absolute left-0 w-full bg-[url('/assets/parallax-assets/cloud2.svg')] bg-cover bg-center"
+          className="absolute left-0 w-full bg-cover bg-center"
           style={{ 
             top: styles.cloudTop2,
-            height: styles.landscapeHeight 
+            height: styles.landscapeHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/cloud2.svg)`
           }}
         />
       </ParallaxLayer>
@@ -193,19 +203,21 @@ function ParallaxHomepage() {
       {/* Back mountains */}
       <ParallaxLayer offset={0} speed={0.2}>
         <div 
-          className="absolute left-0 z-10 w-full bg-[url('/assets/parallax-assets/mountain5.svg')] bg-cover bg-center"
+          className="absolute left-0 z-10 w-full bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight 
+            height: styles.landscapeHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/mountain5.svg)`
           }}
         />
       </ParallaxLayer>
       <ParallaxLayer offset={0} speed={0.25}>
         <div 
-          className="absolute left-0 z-10 w-full bg-[url('/assets/parallax-assets/mountain4.svg')] bg-cover bg-center"
+          className="absolute left-0 z-10 w-full bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight 
+            height: styles.landscapeHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/mountain4.svg)`
           }}
         />
       </ParallaxLayer>
@@ -246,26 +258,29 @@ function ParallaxHomepage() {
       {/* Front mountains */}
       <ParallaxLayer offset={0} speed={0.3}>
         <div 
-          className="absolute left-0 z-40 w-full bg-[url('/assets/parallax-assets/mountain3.svg')] bg-cover bg-center"
+          className="absolute left-0 z-40 w-full bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight 
+            height: styles.landscapeHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/mountain3.svg)`
           }}
         />
         <div 
-          className="absolute left-0 z-40 w-full bg-[url('/assets/parallax-assets/mountain2.svg')] bg-cover bg-center"
+          className="absolute left-0 z-40 w-full bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight 
+            height: styles.landscapeHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/mountain2.svg)`
           }}
         />
       </ParallaxLayer>
       <ParallaxLayer offset={0} speed={0.4}>
         <div 
-          className="absolute left-0 z-40 w-full bg-[url('/assets/parallax-assets/mountain1.svg')] bg-cover bg-center"
+          className="absolute left-0 z-40 w-full bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight 
+            height: styles.landscapeHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/mountain1.svg)`
           }}
         />
       </ParallaxLayer>
@@ -273,10 +288,11 @@ function ParallaxHomepage() {
       {/* Sea and boats */}
       <ParallaxLayer offset={0} speed={0.4}>
         <div 
-          className="absolute left-0 w-full bg-[url('/assets/parallax-assets/sea.svg')] bg-cover bg-center"
+          className="absolute left-0 w-full bg-cover bg-center"
           style={{ 
             top: styles.mountainTop,
-            height: styles.landscapeHeight 
+            height: styles.landscapeHeight,
+            backgroundImage: `url(${basePath}assets/parallax-assets/sea.svg)`
           }}
         />
       </ParallaxLayer>
@@ -284,12 +300,18 @@ function ParallaxHomepage() {
       {/* Beach layers (doubled) */}
       <ParallaxLayer offset={0} speed={0.5}>
         <div 
-          className="absolute left-0 top-0 w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover bg-center filter brightness-125 saturate-100"
-          style={{ height: `calc(${styles.landscapeHeight} + 15vh)` }}
+          className="absolute left-0 top-0 w-full bg-cover bg-center filter brightness-125 saturate-100"
+          style={{ 
+            height: `calc(${styles.landscapeHeight} + 15vh)`,
+            backgroundImage: `url(${basePath}assets/parallax-assets/beach.svg)`
+          }}
         />
         <div 
-          className="absolute left-0 top-0 w-full bg-[url('/assets/parallax-assets/beach.svg')] bg-cover bg-center filter brightness-125 saturate-100 mb-4"
-          style={{ height: `calc(${styles.landscapeHeight} + 35vh)` }}
+          className="absolute left-0 top-0 w-full bg-cover bg-center filter brightness-125 saturate-100 mb-4"
+          style={{ 
+            height: `calc(${styles.landscapeHeight} + 35vh)`,
+            backgroundImage: `url(${basePath}assets/parallax-assets/beach.svg)`
+          }}
         />
       </ParallaxLayer>
 

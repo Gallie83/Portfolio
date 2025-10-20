@@ -1,4 +1,6 @@
 function About() {
+
+  const basePath = import.meta.env.BASE_URL
   return (
     <div className="h-screen flex items-center px-6 md:px-12">
       <div className="max-w-7xl mx-auto w-full">
@@ -12,7 +14,10 @@ function About() {
           {/* Left section - Profile (1 column) */}
           <div className="md:col-span-1 flex flex-col items-center justify-center text-center space-y-4 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg h-full">
             <div className="relative">
-              <div className="w-60 h-60 rounded-full bg-[url('/assets/other-assets/linkdin.jpg')] bg-cover bg-center shadow-lg ring-4 ring-orange-200"></div>
+              <div 
+                className="w-60 h-60 rounded-full bg-cover bg-center shadow-lg ring-4 ring-orange-200"
+                style={{ backgroundImage: `url(${basePath}assets/other-assets/linkdin.jpg)` }}
+              ></div>
             </div>
             
             <div>

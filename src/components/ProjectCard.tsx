@@ -2,6 +2,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { GlobeIcon, Github } from "lucide-react"
 
+const basePath = import.meta.env.BASE_URL;
+
 // Interface for the project data
 export interface Project {
   name: string;
@@ -15,8 +17,7 @@ export interface Project {
 
 export function ProjectCard({ project }: { project: Project }) {
   // Sets images for each project
-  const imagePath = "/assets/data-assets/" + project.name.trim().replace(/\s+/g, '') + ".png";
-  console.log("IP:", imagePath);
+  const imagePath = basePath + "assets/data-assets/" + project.name.trim().replace(/\s+/g, '') + ".png";
 
 
   return (
