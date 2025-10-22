@@ -10,6 +10,26 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 gsap.registerPlugin(ScrollToPlugin)
 
 const basePath = import.meta.env.BASE_URL
+
+// Animated Name heading to fade in letter-by-letter
+function AnimatedText({ text, delay = 0 }: { text: string; delay?: number }) {
+  return (
+    <span className="inline-block">
+      {text.split('').map((char, index) => (
+        <span
+          key={index}
+          className="inline-block animate-fade-in-up opacity-0"
+          style={{
+            animationDelay: `${delay + index * 50}ms`,
+            animationFillMode: 'forwards'
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      ))}
+    </span>
+  )
+}
  
 function ParallaxHomepage() {
   const parallaxRef = useRef<IParallax>(null)
@@ -64,7 +84,7 @@ function ParallaxHomepage() {
           contentOffset: 1.05,
           aboutOffset: 1.05,
           projectsOffset: 1.5,
-          contactOffset: 2.4
+          contactOffset: 2.5
         }
       
       case 'desktop': 
@@ -79,7 +99,7 @@ function ParallaxHomepage() {
           contentOffset: 1.05,
           aboutOffset: 1.05,
           projectsOffset: 1.6,
-          contactOffset: 2.45
+          contactOffset: 2.55
         }
       
       case 'large': // NestHub Max and similar large screens
@@ -109,7 +129,7 @@ function ParallaxHomepage() {
           contentOffset: 1.05,
           aboutOffset: 1.05,
           projectsOffset: 1.6,
-          contactOffset: 2.4
+          contactOffset: 2.5
         }
     }
   }
@@ -157,6 +177,32 @@ function ParallaxHomepage() {
       })
     }
   }
+
+  // Fade-in for sections on scroll
+  useEffect(() => {
+    // Small delay to ensure Parallax layers are rendered
+    const timer = setTimeout(() => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if(entry.isIntersecting) {
+            entry.target.classList.add('showScroll');
+          } else {
+            entry.target.classList.remove('showScroll');
+          }
+        })
+      })
+
+      const hiddenElements = document.querySelectorAll('.hiddenScroll');
+      hiddenElements.forEach((el) => observer.observe(el));
+
+      return () => {
+        hiddenElements.forEach((el) => observer.unobserve(el));
+        observer.disconnect();
+      }
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [])
     
   return (
     <Parallax ref={parallaxRef} pages={totalPages} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
@@ -241,7 +287,7 @@ function ParallaxHomepage() {
                 color: `rgba(255, 255, 255, ${nameOpacity})`,
               }}
             >
-              Kevin Gallagher
+              <AnimatedText text="Kevin Gallagher" delay={0} />
             </h1>
             <p 
               className="text-2xl text-white drop-shadow-md mt-2"
@@ -249,7 +295,7 @@ function ParallaxHomepage() {
                 color: `rgba(255, 255, 255, ${nameOpacity})`,
               }}
             >
-              Full-Stack Developer
+              <AnimatedText text="Full-Stack Developer" delay={800} />
             </p>
           </div>
         </div>
@@ -319,17 +365,17 @@ function ParallaxHomepage() {
       <ParallaxLayer offset={styles.contentOffset} speed={1}>
         <div className="relative z-50">
           {/* About section */}
-          <section id="about" className="min-h-screen py-8">
+          <section id="about" className="hiddenScroll min-h-screen py-8">
             <About />
           </section>
 
           {/* Projects section */}
-          <section id="projects" className="min-h-screen py-8">
+          <section id="projects" className="hiddenScroll min-h-screen py-8">
             <Projects />
           </section>
 
           {/* Contact Section */}
-          <section id="contact" className="min-h-screen pb-8">
+          <section id="contact" className="hiddenScroll min-h-screen pb-8">
             <Contact />
           </section>
         </div>

@@ -1,7 +1,31 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out;
+}
+
 @custom-variant dark (&:is(.dark *));
+
+.hiddenScroll {
+  opacity: 0;
+  transition: all 1.5s;
+}
+
+.showScroll {
+  opacity: 1;
+}
 
 :root {
   --radius: 0.625rem;
