@@ -54,7 +54,7 @@ function ParallaxHomepage() {
         newTotalPages = 3.55
       } else if (width >= 1920 && height >= 1080) {
         newScreenType = 'large' 
-        newTotalPages = 3.3
+        newTotalPages = 3.5
       } else {
         newScreenType = 'laptop' 
         newTotalPages = 3.5
@@ -66,6 +66,8 @@ function ParallaxHomepage() {
 
     window.addEventListener('resize', updateScreenType)
     updateScreenType()
+
+    console.log("WIDTH:", window.innerWidth, "height:", window.innerHeight)
 
     return () => window.removeEventListener('resize', updateScreenType)
   }, [])
@@ -97,9 +99,9 @@ function ParallaxHomepage() {
           cloudTop1: '2%',
           cloudTop2: '3%',
           contentOffset: 1.05,
-          aboutOffset: 1.05,
+          aboutOffset: 1.08,
           projectsOffset: 1.6,
-          contactOffset: 2.4
+          contactOffset: window.innerHeight >= 850 ? 2.4 : 2.5 
         }
       
       case 'large': // NestHub Max and similar large screens
