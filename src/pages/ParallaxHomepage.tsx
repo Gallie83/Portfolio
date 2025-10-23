@@ -47,14 +47,14 @@ function ParallaxHomepage() {
       let newTotalPages = 3.5
       
       if (width >= 1024 && width < 1440) {
-        newScreenType = 'laptop' // ThinkPad dimensions
+        newScreenType = 'laptop'
         newTotalPages = 3.5
       } else if (width >= 1440 && width < 1920) {
         newScreenType = 'desktop'
         newTotalPages = 3.55
       } else if (width >= 1920 && height >= 1080) {
-        newScreenType = 'large' // 4K+ screens (NestHub Max equivalent)
-        newTotalPages = 3.6
+        newScreenType = 'large' 
+        newTotalPages = 3.3
       } else {
         newScreenType = 'laptop' 
         newTotalPages = 3.5
@@ -83,7 +83,7 @@ function ParallaxHomepage() {
           cloudTop2: '2%',
           contentOffset: 1.05,
           aboutOffset: 1.05,
-          projectsOffset: 1.5,
+          projectsOffset: 1.6,
           contactOffset: 2.5
         }
       
@@ -99,22 +99,22 @@ function ParallaxHomepage() {
           contentOffset: 1.05,
           aboutOffset: 1.05,
           projectsOffset: 1.6,
-          contactOffset: 2.55
+          contactOffset: 2.4
         }
       
       case 'large': // NestHub Max and similar large screens
         return {
-          skyHeight: '70%',
+          skyHeight: '80%',
           sunScale: 'scale-120',
           mountainTop: '12%',
           nameTop: '15%',
           landscapeHeight: '125vh',
           cloudTop1: '4%',
-          cloudTop2: '5%',
+          cloudTop2: '7%',
           contentOffset: 1.05,
           aboutOffset: 1.05,
-          projectsOffset: 1.7,
-          contactOffset: 2.5
+          projectsOffset: 1.57,
+          contactOffset: 2.2
         }
       
       default:
@@ -185,14 +185,14 @@ function ParallaxHomepage() {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if(entry.isIntersecting) {
-            entry.target.classList.add('showScroll');
+            entry.target.classList.add('show-scroll');
           } else {
-            entry.target.classList.remove('showScroll');
+            entry.target.classList.remove('show-scroll');
           }
         })
       })
 
-      const hiddenElements = document.querySelectorAll('.hiddenScroll');
+      const hiddenElements = document.querySelectorAll('.hidden-scroll');
       hiddenElements.forEach((el) => observer.observe(el));
 
       return () => {
@@ -365,17 +365,17 @@ function ParallaxHomepage() {
       <ParallaxLayer offset={styles.contentOffset} speed={1}>
         <div className="relative z-50">
           {/* About section */}
-          <section id="about" className="hiddenScroll min-h-screen py-8">
+          <section id="about" className="hidden-scroll min-h-screen py-8">
             <About />
           </section>
 
           {/* Projects section */}
-          <section id="projects" className="hiddenScroll min-h-screen py-8">
+          <section id="projects" className="hidden-scroll min-h-screen py-8">
             <Projects />
           </section>
 
           {/* Contact Section */}
-          <section id="contact" className="hiddenScroll min-h-screen pb-8">
+          <section id="contact" className="hidden-scroll min-h-screen pb-8">
             <Contact />
           </section>
         </div>
