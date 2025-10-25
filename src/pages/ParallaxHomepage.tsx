@@ -1,6 +1,7 @@
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax'
 import { useRef, useState, useEffect } from 'react'
 import Navbar from '@/components/Navbar'
+import MobileNav from '@/components/MobileNav'
 import About from './About'
 import Projects from './Projects'
 import Contact from "./Contact"
@@ -32,6 +33,7 @@ function AnimatedText({ text, delay = 0 }: { text: string; delay?: number }) {
 }
  
 function ParallaxHomepage() {
+  const [isMobile, setIsMobile] = useState(false);
   const parallaxRef = useRef<IParallax>(null)
   const [nameOpacity, setNameOpacity] = useState(1)
   const [screenType, setScreenType] = useState('laptop')
@@ -42,6 +44,12 @@ function ParallaxHomepage() {
     const updateScreenType = () => {
       const width = window.innerWidth
       const height = window.innerHeight
+
+      // Mobile check first
+      if(width < 768) { 
+        setIsMobile(true)
+        return
+      }
       
       let newScreenType = 'laptop'
       let newTotalPages = 3.5
@@ -270,9 +278,13 @@ function ParallaxHomepage() {
         />
       </ParallaxLayer>
 
-      {/* Sidenav */}
-      <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: totalPages}}>
-        <Navbar onNavigate={scrollToSection} />
+      {/* Navigation */}
+      <ParallaxLayer className={`${isMobile} ? '' : 'pointer-events-none'`} offset={0} sticky={{start: 0, end: totalPages}}>
+        {isMobile ? 
+          <MobileNav onNavigate={scrollToSection}/> 
+          : 
+          <Navbar onNavigate={scrollToSection} />
+        }
       </ParallaxLayer>
 
       {/* Name heading */}
@@ -385,5 +397,6 @@ function ParallaxHomepage() {
     </Parallax>
   )
 }
+
 
 export default ParallaxHomepage
