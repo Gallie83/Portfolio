@@ -17,6 +17,22 @@
   animation: fade-in-up 0.5s ease-out;
 }
 
+// Mobile Navbar on-click animation
+@keyframes slide-in-right {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.5s ease-out forwards;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 .hidden-scroll {
