@@ -1,6 +1,6 @@
 function Contact() {
   return (
-    <div className="min-h-screen px-6 py-12 md:px-12">
+    <div className="md:min-h-screen px-6 py-12 md:px-12">
       <div className="max-w-7xl mx-auto">
         
         {/* Header Section - Left Aligned */}

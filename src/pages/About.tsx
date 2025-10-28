@@ -2,17 +2,16 @@ function About() {
 
   const basePath = import.meta.env.BASE_URL
   return (
-    <div className="h-screen flex items-center px-6 md:px-12">
+    <div className="md:h-screen flex items-center px-6 md:px-12 py-8 md:py-0">
       <div className="max-w-7xl mx-auto w-full">
 
         <h1 className="text-5xl font-bold text-white mb-4">About Me</h1>
         <div className="h-1 w-24 bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] rounded-full mb-3"></div>
-
-        <div className="grid md:grid-cols-3 gap-6 h-[85vh] xl:h-[75vh] 2xl:h-[70vh]">
+        <div className="grid md:grid-cols-3 gap-6 md:h-[85vh] xl:h-[75vh] 2xl:h-[70vh]">
 
           
-          {/* Left section - Profile (1 column) */}
-          <div className="md:col-span-1 flex flex-col items-center justify-center text-center space-y-3 xl:space-y-4 2xl:space-y-6 bg-white/95 backdrop-blur-sm rounded-2xl p-4 xl:p-6 2xl:p-8 shadow-lg h-full">
+          {/* Left section - Profile */}
+          <div className="md:col-span-1 flex flex-col items-center justify-center text-center space-y-3 xl:space-y-4 2xl:space-y-6 bg-white/95 backdrop-blur-sm rounded-2xl p-4 xl:p-6 2xl:p-8 shadow-lg md:h-full">
             <div className="relative">
               <div 
                 className="w-60 h-60 rounded-full bg-cover bg-center shadow-lg ring-4 ring-orange-200"
@@ -52,8 +51,8 @@ function About() {
             </div>
           </div>
 
-          {/* Right section - Single Card (2 columns) */}
-          <div className="md:col-span-2 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-6 h-full">
+          {/* Right section - Single Card */}
+          <div className="md:col-span-2 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-6 md:h-full">
             {/* About text */}
             <div className="space-y-4 text-gray-700 leading-relaxed text-base">
               <p className="font-medium">
@@ -61,7 +60,7 @@ function About() {
               </p>
               
               <p className="font-medium">
-                I thrive in collaborative environments and genuinely enjoy connecting with other developers – some of my best projects have come from people I've met at hackathons and through the dev community.
+                I thrive in collaborative environments and genuinely enjoy connecting with other developers — some of my best projects have come from people I've met at hackathons and through the dev community.
               </p>
               
               <p className="font-medium">

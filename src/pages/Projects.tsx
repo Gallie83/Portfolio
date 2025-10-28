@@ -62,7 +62,7 @@ const skills = [
   };
 
   return (
-    <div className="min-h-screen px-6 py-6 md:px-12">
+    <div className="md:min-h-screen px-6 py-6 md:px-12">
       <div className="max-w-7xl mx-auto">
         
         {/* Header Section */}

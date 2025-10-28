@@ -44,28 +44,29 @@ function ParallaxHomepage() {
     const updateScreenType = () => {
       const width = window.innerWidth
       const height = window.innerHeight
-
-      // Mobile check first
-      if(width < 768) { 
-        setIsMobile(true)
-        return
-      }
       
       let newScreenType = 'laptop'
       let newTotalPages = 3.5
       
-      if (width >= 1024 && width < 1440) {
-        newScreenType = 'laptop'
-        newTotalPages = 3.5
-      } else if (width >= 1440 && width < 1920) {
-        newScreenType = 'desktop'
-        newTotalPages = 3.55
-      } else if (width >= 1920 && height >= 1080) {
-        newScreenType = 'large' 
-        newTotalPages = 3.5
+      if (width <= 768) {
+        setIsMobile(true)
+        newScreenType = 'mobile'
+        newTotalPages = 6.5
       } else {
-        newScreenType = 'laptop' 
-        newTotalPages = 3.5
+          setIsMobile(false);
+          if (width >= 1024 && width < 1440) {
+            newScreenType = 'laptop'
+          newTotalPages = 3.5
+        } else if (width >= 1440 && width < 1920) {
+          newScreenType = 'desktop'
+          newTotalPages = 3.55
+        } else if (width >= 1920 && height >= 1080) {
+          newScreenType = 'large' 
+          newTotalPages = 3.5
+        } else {
+          newScreenType = 'laptop' 
+          newTotalPages = 3.5
+        }
       }
       
       setScreenType(newScreenType)
@@ -80,8 +81,23 @@ function ParallaxHomepage() {
     return () => window.removeEventListener('resize', updateScreenType)
   }, [])
 
-  const getDesktopStyles = () => {
+  const calculateScreenSizes = () => {
     switch (screenType) {
+      case 'mobile':
+        return {
+          skyHeight: '65%',
+          sunScale: 'scale-105',
+          mountainTop: '5%',
+          nameTop: '10%',
+          landscapeHeight: '110vh',
+          cloudTop1: '1%',
+          cloudTop2: '2%',
+          contentOffset: 1.05,
+          aboutOffset: 1.05,
+          projectsOffset: 2.1,
+          contactOffset: 3.2
+        }
+
       case 'laptop':
         return {
           skyHeight: '65%',
@@ -95,7 +111,7 @@ function ParallaxHomepage() {
           aboutOffset: 1.05,
           projectsOffset: 1.6,
           contactOffset: 2.5
-        }
+        }  
       
       case 'desktop': 
         return {
@@ -144,7 +160,7 @@ function ParallaxHomepage() {
     }
   }
 
-  const styles = getDesktopStyles()
+  const styles = calculateScreenSizes()
 
   // Make Title heading change color to match background after scrolling behind mountains
   useEffect(() => {
@@ -165,7 +181,7 @@ function ParallaxHomepage() {
 
     container.addEventListener('scroll', handleScroll, { passive: true })
     return () => container.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [screenType])
 
   // Updated scroll animation with screen-specific offsets
   const scrollToSection = (section: string) => {
@@ -212,11 +228,18 @@ function ParallaxHomepage() {
     }, 100)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [screenType])
     
   return (
-    <Parallax ref={parallaxRef} pages={totalPages} style={{ top: '0', left: '0' }} className='animation bg-[#983122]'>
-      {/* Sky background */}
+    <Parallax 
+      key={screenType}  // Forces re-initialization when screen type changes
+      ref={parallaxRef} 
+      pages={totalPages} 
+      style={{ top: '0', left: '0' }} 
+      className='animation bg-[#983122]'
+    >      
+    
+    {/* Sky background */}
       <ParallaxLayer offset={0} speed={0.1}>
         <div 
           className="fixed left-0 top-0 w-full bg-cover bg-center"
@@ -295,7 +318,7 @@ function ParallaxHomepage() {
             style={{ top: styles.nameTop }}
           >
             <h1 
-              className="text-7xl text-white drop-shadow-lg" 
+              className="text-5xl md:text-7xl text-white drop-shadow-lg" 
               style={{
                 fontFamily: 'Ephesis', 
                 color: `rgba(255, 255, 255, ${nameOpacity})`,
@@ -304,7 +327,7 @@ function ParallaxHomepage() {
               <AnimatedText text="Kevin Gallagher" delay={0} />
             </h1>
             <p 
-              className="text-2xl text-white drop-shadow-md mt-2"
+              className="text-lg md:text-2xl text-white drop-shadow-md mt-2"
               style={{
                 color: `rgba(255, 255, 255, ${nameOpacity})`,
               }}
@@ -379,17 +402,17 @@ function ParallaxHomepage() {
       <ParallaxLayer offset={styles.contentOffset} speed={1}>
         <div className="relative z-50">
           {/* About section */}
-          <section id="about" className="hidden-scroll min-h-screen py-8">
+          <section id="about" className="hidden-scroll md:min-h-screen py-8">
             <About />
           </section>
 
           {/* Projects section */}
-          <section id="projects" className="hidden-scroll min-h-screen py-8">
+          <section id="projects" className="hidden-scroll md:min-h-screen py-8">
             <Projects />
           </section>
 
           {/* Contact Section */}
-          <section id="contact" className="hidden-scroll min-h-screen pb-8">
+          <section id="contact" className="hidden-scroll md:min-h-screen pb-8">
             <Contact />
           </section>
         </div>
