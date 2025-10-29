@@ -8,6 +8,7 @@ import Contact from "./Contact"
 
 import { gsap } from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
+
 gsap.registerPlugin(ScrollToPlugin)
 
 const basePath = import.meta.env.BASE_URL
@@ -33,70 +34,160 @@ function AnimatedText({ text, delay = 0 }: { text: string; delay?: number }) {
 }
  
 function ParallaxHomepage() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false)
   const parallaxRef = useRef<IParallax>(null)
   const [nameOpacity, setNameOpacity] = useState(1)
   const [screenType, setScreenType] = useState('laptop')
   const [totalPages, setTotalPages] = useState(3.5)
+  const [sectionHeights, setSectionHeights] = useState({
+    about: 1,
+    projects: 1,
+    contact: 1,
+  })
+  const [measurementsTaken, setMeasurementsTaken] = useState(false)
 
-  // Screen type detection with proper sizing
+  const homeHeight = 1.05
+
+  // Screen type detection
   useEffect(() => {
     const updateScreenType = () => {
       const width = window.innerWidth
-      const height = window.innerHeight
       
-      let newScreenType = 'laptop'
-      let newTotalPages = 3.5
-      
-      if (width <= 768) {
+      if (width <= 640) {
         setIsMobile(true)
-        newScreenType = 'mobile'
-        newTotalPages = 6.5
+        setScreenType('mobile')
+      } else if (width <= 1024) {
+        setIsMobile(false)
+        setScreenType('laptop')
+      } else if (width <= 1920) {
+        setIsMobile(false)
+        setScreenType('desktop')
       } else {
-          setIsMobile(false);
-          if (width >= 1024 && width < 1440) {
-            newScreenType = 'laptop'
-          newTotalPages = 3.5
-        } else if (width >= 1440 && width < 1920) {
-          newScreenType = 'desktop'
-          newTotalPages = 3.55
-        } else if (width >= 1920 && height >= 1080) {
-          newScreenType = 'large' 
-          newTotalPages = 3.5
-        } else {
-          newScreenType = 'laptop' 
-          newTotalPages = 3.5
-        }
+        setIsMobile(false)
+        setScreenType('large')
       }
-      
-      setScreenType(newScreenType)
-      setTotalPages(newTotalPages)
     }
 
     window.addEventListener('resize', updateScreenType)
     updateScreenType()
 
-    console.log("WIDTH:", window.innerWidth, "height:", window.innerHeight)
-
     return () => window.removeEventListener('resize', updateScreenType)
   }, [])
 
+  // Measure size of each content section
+  useEffect(() => {
+    const measureSections = () => {
+      const aboutEl = document.getElementById('about')
+      const projectsEl = document.getElementById('projects')
+      const contactEl = document.getElementById('contact')
+
+    if(aboutEl && projectsEl && contactEl) {
+      // CHECK if Projects has actual content first
+      const projectCards = projectsEl.querySelectorAll('*') 
+      console.log('🔍 Projects children count:', projectCards.length)
+
+      if (projectCards.length < 5) {
+        console.log('⚠️ Projects not ready, retrying in 200ms...')
+        setTimeout(measureSections, 200)
+        return
+      }
+
+      const sections = [aboutEl, projectsEl, contactEl]
+      
+      // Remove hidden-scroll class
+      sections.forEach(el => {
+        el.classList.remove('hidden-scroll')
+      })
+
+      // Force full visibility
+      // sections.forEach(el => {
+      //   el.style.opacity = '1'
+      //   el.style.visibility = 'visible'
+      // })
+
+      // Wait for layout
+      requestAnimationFrame(() => {
+        const vh = window.innerHeight
+
+        const aboutHeight = aboutEl.scrollHeight / vh
+        const projectsHeight = projectsEl.scrollHeight / vh
+        const contactHeight = contactEl.scrollHeight / vh
+
+        console.log('📐 Section heights (vh):', {
+          about: aboutHeight.toFixed(2),
+          projects: projectsHeight.toFixed(2),
+          contact: contactHeight.toFixed(2)
+        })
+
+        setSectionHeights({
+          about: aboutHeight,
+          projects: projectsHeight,
+          contact: contactHeight,
+        })
+
+        sections.forEach((el) => {
+          el.classList.add('hidden-scroll')
+        })
+
+        // Reset visibility
+        // sections.forEach(el => {
+        //   el.style.opacity = ''
+        //   el.style.visibility = ''
+        // })
+
+        setMeasurementsTaken(true)
+          
+        })
+      }
+    }
+
+    // Wait for content to load before measuring
+    const timer = setTimeout(measureSections, 100)
+
+    // Re-measure on window resize
+    window.addEventListener('resize', measureSections)
+
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('resize', measureSections)
+    }
+  }, [screenType])
+
+  // Update totalPages when section heights change
+  useEffect(() => {
+    const calculatedTotal = homeHeight + 
+      sectionHeights.about + 
+      sectionHeights.projects + 
+      sectionHeights.contact + 
+      0.5 // Buffer
+    
+      console.log('Setting totalPages to :', calculatedTotal)
+      setTotalPages(calculatedTotal)
+  }, [sectionHeights])
+
   const calculateScreenSizes = () => {
+    const projectsStart = homeHeight + sectionHeights.about
+    const contactStart = projectsStart + sectionHeights.projects
+
+    const offsets = {
+      contentOffset: homeHeight,
+      aboutOffset: homeHeight,
+      projectsOffset: projectsStart,
+      contactOffset: contactStart
+    }
+
     switch (screenType) {
-      case 'mobile':
-        return {
-          skyHeight: '65%',
-          sunScale: 'scale-105',
-          mountainTop: '5%',
-          nameTop: '10%',
-          landscapeHeight: '110vh',
-          cloudTop1: '1%',
-          cloudTop2: '2%',
-          contentOffset: 1.05,
-          aboutOffset: 1.05,
-          projectsOffset: 2.1,
-          contactOffset: 3.2
-        }
+    case 'mobile': 
+      return {
+        skyHeight: '68%',
+        sunScale: 'scale-108',
+        mountainTop: '6%',
+        nameTop: '11%',
+        landscapeHeight: '112vh',
+        cloudTop1: '1.5%',
+        cloudTop2: '2.5%',
+        ...offsets
+      }
 
       case 'laptop':
         return {
@@ -107,10 +198,7 @@ function ParallaxHomepage() {
           landscapeHeight: '110vh',
           cloudTop1: '1%',
           cloudTop2: '2%',
-          contentOffset: 1.05,
-          aboutOffset: 1.05,
-          projectsOffset: 1.6,
-          contactOffset: 2.5
+          ...offsets
         }  
       
       case 'desktop': 
@@ -122,13 +210,10 @@ function ParallaxHomepage() {
           landscapeHeight: '115vh',
           cloudTop1: '2%',
           cloudTop2: '3%',
-          contentOffset: 1.05,
-          aboutOffset: 1.08,
-          projectsOffset: 1.6,
-          contactOffset: window.innerHeight >= 850 ? 2.4 : 2.5 
+          ...offsets
         }
       
-      case 'large': // NestHub Max and similar large screens
+      case 'large': 
         return {
           skyHeight: '80%',
           sunScale: 'scale-120',
@@ -137,10 +222,7 @@ function ParallaxHomepage() {
           landscapeHeight: '125vh',
           cloudTop1: '4%',
           cloudTop2: '7%',
-          contentOffset: 1.05,
-          aboutOffset: 1.05,
-          projectsOffset: 1.57,
-          contactOffset: 2.2
+          ...offsets
         }
       
       default:
@@ -152,10 +234,7 @@ function ParallaxHomepage() {
           landscapeHeight: '110vh',
           cloudTop1: '1%',
           cloudTop2: '2%',
-          contentOffset: 1.05,
-          aboutOffset: 1.05,
-          projectsOffset: 1.6,
-          contactOffset: 2.5
+          ...offsets
         }
     }
   }
@@ -185,27 +264,61 @@ function ParallaxHomepage() {
 
   // Updated scroll animation with screen-specific offsets
   const scrollToSection = (section: string) => {
-    const sectionMap = {
+    if (!parallaxRef.current) return;
+    const container = parallaxRef.current.container.current;
+    if (!container) return;
+
+    // With speed={1}, the layer scrolls WITH you
+    // So to reach content at position P in layer at offset O:
+    // You need to scroll to: O + (P / 2)
+    // Because the layer is also moving down as you scroll
+    
+    const sectionPositionsInLayer = {
       'home': 0,
-      'about': styles.aboutOffset, 
-      'projects': styles.projectsOffset,
-      'contact': styles.contactOffset
-    }
+      'about': 0, // Top of content layer
+      'projects': sectionHeights.about, 
+      'contact': sectionHeights.about + sectionHeights.projects 
+    };
     
-    const targetOffset = sectionMap[section as keyof typeof sectionMap]
+    const positionInLayer = sectionPositionsInLayer[section as keyof typeof sectionPositionsInLayer];
     
-    if (targetOffset !== undefined && parallaxRef.current) {
-      const container = parallaxRef.current.container.current
+    if (positionInLayer === undefined) return;
+    
+    if (section === 'home') {
       gsap.to(container, {
-        scrollTop: targetOffset * window.innerHeight,
+        scrollTop: 0,
         duration: 3,
         ease: "power2.inOut"
-      })
+      });
+      return;
     }
-  }
+    
+    // Formula: scrollPosition = layerOffset + (contentPosition / 2)
+    const targetVh = homeHeight + (positionInLayer / 2);
+    const targetScroll = targetVh * window.innerHeight;
+    
+    console.log(`Scrolling to ${section}:`, {
+      layerOffset: homeHeight,
+      positionInLayer: positionInLayer.toFixed(2),
+      targetVh: targetVh.toFixed(2),
+      targetPx: targetScroll.toFixed(0),
+      formula: `${homeHeight} + (${positionInLayer.toFixed(2)} / 2)`
+    });
+    
+    gsap.to(container, {
+      scrollTop: targetScroll,
+      duration: 3,
+      ease: "power2.inOut",
+      onComplete: () => {
+        console.log(`✅ Scroll complete. Final position: ${container.scrollTop.toFixed(0)}px = ${(container.scrollTop / window.innerHeight).toFixed(2)}vh`);
+      }
+    });
+  };
 
   // Fade-in for sections on scroll
   useEffect(() => {
+    // Ensure section heights are taken before observer runs
+    if(!measurementsTaken) return
     // Small delay to ensure Parallax layers are rendered
     const timer = setTimeout(() => {
       const observer = new IntersectionObserver((entries) => {
@@ -228,7 +341,7 @@ function ParallaxHomepage() {
     }, 100)
 
     return () => clearTimeout(timer)
-  }, [screenType])
+  }, [measurementsTaken, screenType])
     
   return (
     <Parallax 
@@ -239,7 +352,7 @@ function ParallaxHomepage() {
       className='animation bg-[#983122]'
     >      
     
-    {/* Sky background */}
+      {/* Sky background */}
       <ParallaxLayer offset={0} speed={0.1}>
         <div 
           className="fixed left-0 top-0 w-full bg-cover bg-center"
@@ -302,9 +415,11 @@ function ParallaxHomepage() {
       </ParallaxLayer>
 
       {/* Navigation */}
-      <ParallaxLayer className={`${isMobile} ? '' : 'pointer-events-none'`} offset={0} sticky={{start: 0, end: totalPages}}>
+      <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: totalPages}}>
         {isMobile ? 
-          <MobileNav onNavigate={scrollToSection}/> 
+          <div className='pointer-events-auto'>
+            <MobileNav onNavigate={scrollToSection}/> 
+          </div>
           : 
           <Navbar onNavigate={scrollToSection} />
         }
