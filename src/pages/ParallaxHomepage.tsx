@@ -38,7 +38,6 @@ function ParallaxHomepage() {
   const parallaxRef = useRef<IParallax>(null)
   const [nameOpacity, setNameOpacity] = useState(1)
   const [screenType, setScreenType] = useState('laptop')
-  const [totalPages, setTotalPages] = useState(3.5)
   const [sectionHeights, setSectionHeights] = useState({
     about: 1,
     projects: 1,
@@ -49,23 +48,68 @@ function ParallaxHomepage() {
   const homeHeight = 1.05
 
   // Screen type detection
-  useEffect(() => {
-    const updateScreenType = () => {
+  const getScreenType = () => {
       const width = window.innerWidth
-      
+
       if (width <= 640) {
-        setIsMobile(true)
-        setScreenType('mobile')
+        return {isMobile: true, screenType: 'mobile' as const};
       } else if (width <= 1024) {
-        setIsMobile(false)
-        setScreenType('laptop')
+        return {isMobile: false, screenType: 'laptop' as const};
       } else if (width <= 1920) {
-        setIsMobile(false)
-        setScreenType('desktop')
+        return {isMobile: false, screenType: 'desktop' as const};
       } else {
-        setIsMobile(false)
-        setScreenType('large')
+        return {isMobile: false, screenType: 'large' as const};
       }
+    }
+
+  // Calculate totalPages directly based on current state
+  const calculateTotalPages = () => {
+    const totalContentHeight = sectionHeights.about + 
+      sectionHeights.projects + 
+      sectionHeights.contact;
+    
+    const vh = window.innerHeight;
+
+    const { screenType: currentScreenType } = getScreenType()
+
+    let multiplier = 0.75;
+    let buffer = 0.5;
+    
+    if (currentScreenType === 'mobile') {
+      if (vh <= 570) {
+        multiplier = 1.45;
+        buffer = 1;
+      } else if (vh <= 640) {
+        multiplier = 1.3;
+        buffer = 0.75;
+      } else if (vh <= 740) {
+        multiplier = 1.2;
+        buffer = 0.5;
+      } else if (vh <= 850) {
+        multiplier = 1.15;
+        buffer = 0.5;
+      } else {
+        multiplier = 1.0;
+        buffer = 0.5;
+      }
+    } else if (currentScreenType === 'laptop') {
+      multiplier = 0.75;
+      buffer = 0.5;
+    } else {
+      multiplier = 0.75;
+    }
+
+    return homeHeight + (totalContentHeight * multiplier) + buffer;
+  };
+
+  const totalPages = calculateTotalPages();
+
+  // Set screenType and isMobile state variables
+  useEffect(() => {
+    const updateScreenType = () => {      
+      const { isMobile: mobile, screenType: type } = getScreenType();
+      setIsMobile(mobile);
+      setScreenType(type)
     }
 
     window.addEventListener('resize', updateScreenType)
@@ -152,18 +196,6 @@ function ParallaxHomepage() {
       window.removeEventListener('resize', measureSections)
     }
   }, [screenType])
-
-  // Update totalPages when section heights change
-  useEffect(() => {
-    const calculatedTotal = homeHeight + 
-      sectionHeights.about + 
-      sectionHeights.projects + 
-      sectionHeights.contact + 
-      0.5 // Buffer
-    
-      console.log('Setting totalPages to :', calculatedTotal)
-      setTotalPages(calculatedTotal)
-  }, [sectionHeights])
 
   const calculateScreenSizes = () => {
     const projectsStart = homeHeight + sectionHeights.about
