@@ -383,6 +383,16 @@ function ParallaxHomepage() {
       style={{ top: '0', left: '0' }} 
       className='animation bg-[#983122]'
     >      
+      {/* Navigation */}
+      <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: totalPages}}>
+        {isMobile ? 
+          <div className='pointer-events-auto'>
+            <MobileNav onNavigate={scrollToSection}/> 
+          </div>
+          : 
+          <Navbar onNavigate={scrollToSection} />
+        }
+      </ParallaxLayer>
     
       {/* Sky background */}
       <ParallaxLayer offset={0} speed={0.1}>
@@ -446,16 +456,6 @@ function ParallaxHomepage() {
         />
       </ParallaxLayer>
 
-      {/* Navigation */}
-      <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: totalPages}}>
-        {isMobile ? 
-          <div className='pointer-events-auto'>
-            <MobileNav onNavigate={scrollToSection}/> 
-          </div>
-          : 
-          <Navbar onNavigate={scrollToSection} />
-        }
-      </ParallaxLayer>
 
       {/* Name heading */}
       <ParallaxLayer offset={0} speed={-1.2}>

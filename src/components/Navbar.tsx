@@ -5,48 +5,60 @@ interface NavbarProps {
 }
 
 function Navbar({ onNavigate }: NavbarProps) {
-
-  
   return (
-    <div className="fixed top-1/2 transform -translate-y-1/2 py-20 z-50 backdrop-blur-sm pointer-events-auto group">
-      {/* Right border */}
-      <div className="absolute right-0 top-0 h-full w-0.5 bg-gradient-to-b from-transparent via-white to-transparent"></div>
+    <div className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 backdrop-blur-sm pointer-events-auto group">
+      {/* Bottom border */}
+      <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"></div>
 
       {/* Navbar */}
-      <nav className="px-6 py-6 transition-all duration-300 group-hover:pr-20 group-hover:mr-3.5">
-        <ul className="flex flex-col items-start space-y-9">
-          <li className="relative">
-            <button onClick ={() => onNavigate('home')} 
-              className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center gap-3">
+      <nav className="px-3 py-3 transition-all duration-300">
+        <ul className="flex flex-row items-center gap-9 group-hover:gap-20 transition-all duration-500 ease-in-out">
+          <li className="relative flex items-center justify-center">
+            <button 
+              onClick={() => onNavigate('home')} 
+              className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3"
+            >
               <Home size={24}/>
-              <span className="absolute left-0 top-0 opacity-0 group-hover:opacity-100 px-2 py-1 rounded transition-all duration-500 ease-out transform translate-x-0 group-hover:translate-x-8 whitespace-nowrap">
+              <span className="w-0 overflow-hidden opacity-0 group-hover:w-auto group-hover:opacity-100 transition-all duration-500 ease-out whitespace-nowrap">
                 Home
               </span>
             </button>
+            <span className="absolute -right-5 group-hover:-right-10 text-white text-xl opacity-0 group-hover:opacity-100 transition-all duration-500">|</span>
           </li>
-          <li className="relative">
-            <button onClick ={() => onNavigate('about')} 
-              className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center gap-3">
+          
+          <li className="relative flex items-center justify-center">
+            <button 
+              onClick={() => onNavigate('about')} 
+              className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3"
+            >
               <User size={24}/>
-              <span className="absolute left-0 top-0 opacity-0 group-hover:opacity-100 px-2 py-1 rounded transition-all duration-500 ease-out transform translate-x-0 group-hover:translate-x-8 whitespace-nowrap">
+              <span className="w-0 overflow-hidden opacity-0 group-hover:w-auto group-hover:opacity-100 transition-all duration-500 ease-out whitespace-nowrap">
                 About
               </span>
             </button>
+            <span className="absolute -right-5 group-hover:-right-10 text-white text-xl opacity-0 group-hover:opacity-100 transition-all duration-500">|</span>
           </li>
-          <li className="relative">
-            <button onClick ={() => onNavigate('projects')} 
-              className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center gap-3">
+          
+          <li className="relative flex items-center justify-center">
+            <button 
+              onClick={() => onNavigate('projects')} 
+              className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3"
+            >
               <FolderOpen size={24}/>
-              <span className="absolute left-0 top-0 opacity-0 group-hover:opacity-100 px-2 py-1 rounded transition-all duration-500 ease-out transform translate-x-0 group-hover:translate-x-8 whitespace-nowrap">
+              <span className="w-0 overflow-hidden opacity-0 group-hover:w-auto group-hover:opacity-100 transition-all duration-500 ease-out whitespace-nowrap">
                 Projects
               </span>
             </button>
+            <span className="absolute -right-5 group-hover:-right-10 text-white text-xl opacity-0 group-hover:opacity-100 transition-all duration-500">|</span>
           </li>
-          <li className="relative">
-            <button onClick ={() => onNavigate('contact')} 
-              className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center gap-3">
+          
+          <li className="relative flex items-center justify-center">
+            <button 
+              onClick={() => onNavigate('contact')} 
+              className="text-white hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3"
+            >
               <Mail size={24}/>
-              <span className="absolute left-0 top-0 hover:backdrop-blur-3xl opacity-0 group-hover:opacity-100 px-2 py-1 rounded transition-all duration-500 ease-out transform translate-x-0 group-hover:translate-x-8 whitespace-nowrap">
+              <span className="w-0 overflow-hidden opacity-0 group-hover:w-auto group-hover:opacity-100 transition-all duration-500 ease-out whitespace-nowrap">
                 Contact
               </span>
             </button>
