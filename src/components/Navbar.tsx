@@ -6,7 +6,7 @@ interface NavbarProps {
 
 function Navbar({ onNavigate }: NavbarProps) {
   return (
-    <div className="fixed top-0 left-1/2 transform -translate-x-1/2 z-50 backdrop-blur-sm pointer-events-auto group">
+    <div className="fixed top-0 left-1/2 px-5 transform -translate-x-1/2 z-50 backdrop-blur-sm pointer-events-auto group">
       {/* Bottom border */}
       <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-white to-transparent"></div>
 

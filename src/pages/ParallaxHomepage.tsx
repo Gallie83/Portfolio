@@ -223,7 +223,7 @@ function ParallaxHomepage() {
 
       case 'laptop':
         return {
-          skyHeight: '65%',
+          skyHeight: '70%',
           sunScale: 'scale-105',
           mountainTop: '5%',
           nameTop: '10%',
@@ -235,7 +235,7 @@ function ParallaxHomepage() {
       
       case 'desktop': 
         return {
-          skyHeight: '68%',
+          skyHeight: '70%',
           sunScale: 'scale-110',
           mountainTop: '8%',
           nameTop: '12%',
