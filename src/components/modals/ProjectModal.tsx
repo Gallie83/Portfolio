@@ -46,7 +46,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             <CardHeader className="bg-[#983122] p-3 !pb-0 flex-shrink-0">
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
-                  <CardTitle className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 md:mb-4">{project.name}</CardTitle>
+                  <CardTitle className="text-2xl md:text-3xl xl:text-4xl font-bold text-white mb-3 md:mb-4">{project.name}</CardTitle>
                   
                   <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                   {/* Links */}
@@ -98,9 +98,9 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             </CardHeader>
 
             {/* Main content - scrollable on mobile/tablet, with sliding overlay on desktop */}
-            <CardContent className="p-0 flex-1 overflow-y-auto lg:overflow-hidden relative">
+            <CardContent className="p-0 flex-1 overflow-y-auto xl:overflow-hidden relative">
               {/* Mobile/Tablet Layout */}
-              <div className="lg:hidden flex flex-col">
+              <div className="xl:hidden flex flex-col">
                 {/* Image */}
                 <div className="w-full">
                   <img
@@ -129,7 +129,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
               </div>
 
               {/* Desktop Layout - Sliding Overlay */}
-              <div className="hidden lg:block relative w-full h-full min-h-[500px]">
+              <div className="hidden xl:block relative w-full h-full min-h-[500px]">
                 {/* Image */}
                 <img
                   src={imagePath}
@@ -144,14 +144,14 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                   <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
                     {/* Description */}
                     <div className="space-y-2">
-                      <h3 className="text-lg font-bold border-b border-gray-200 pb-2">Description</h3>
+                      <h3 className="text-xl font-bold border-b border-gray-200 pb-2">Description</h3>
                       <p className="leading-relaxed">{project.description}</p>
                     </div>
 
                     {/* Contribution (if exists) */}
                     {project.contribution && (
                       <div className="space-y-2">
-                        <h3 className="text-lg font-bold border-b border-gray-200 pb-2">My Contribution</h3>
+                        <h3 className="text-xl font-bold border-b border-gray-200 pb-2">My Contribution</h3>
                         <p className="leading-relaxed">{project.contribution}</p>
                       </div>
                     )}

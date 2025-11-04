@@ -2,32 +2,33 @@ function About() {
 
   const basePath = import.meta.env.BASE_URL
   return (
-    <div className="md:h-screen flex items-center px-6 md:px-12 py-8 md:py-0">
-      <div className="max-w-7xl mx-auto w-full">
+    <div className="md:min-h-screen px-6 py-12 md:px-12">
+      <div className="max-w-7xl mx-auto">
 
         <h1 className="text-5xl font-bold text-white mb-4">About Me</h1>
         <div className="h-1 w-24 bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] rounded-full mb-3"></div>
-        <div className="grid md:grid-cols-3 gap-6 md:h-[85vh] xl:h-[75vh] 2xl:h-[70vh]">
+        <div className="grid xl:grid-cols-3 gap-6 lg:h-[85vh] xl:h-[75vh] 2xl:h-[70vh]">
 
           
           {/* Left section - Profile */}
-          <div className="md:col-span-1 flex flex-col items-center justify-center text-center space-y-3 xl:space-y-4 2xl:space-y-6 bg-white/95 backdrop-blur-sm rounded-2xl p-4 xl:p-6 2xl:p-8 shadow-lg md:h-full">
+          <div className="xl:col-span-1 flex flex-col items-center justify-center text-center space-y-3 xl:space-y-4 2xl:space-y-6 bg-white/95 backdrop-blur-sm rounded-2xl p-4 xl:p-6 2xl:p-8 shadow-xl xl:h-full">
+            {/* Self Image */}
             <div className="relative">
               <div 
-                className="w-60 h-60 rounded-full bg-cover bg-center shadow-lg ring-4 ring-orange-200"
+                className="w-56 h-56 xl:w-60 xl:h-60 rounded-full bg-cover bg-center shadow-xl ring-4 ring-orange-200"
                 style={{ backgroundImage: `url(${basePath}assets/other-assets/linkdin.jpg)` }}
               ></div>
             </div>
             
             <div>
               <h2 className="text-2xl font-bold text-[#983122] mb-2">Kevin Gallagher</h2>
-              <p className="text-lg text-[#FB8B24] font-medium mb-1">Full Stack Developer</p>
+              <p className="text-xl text-[#FB8B24] font-medium mb-1">Full Stack Developer</p>
             </div>
 
             <div className="flex gap-4 pt-2">
               {/* GitHub Button */}  
               <a
-                className="w-14 h-14 bg-gray-800 hover:bg-gray-900 text-white rounded-lg flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-1"
+                className="w-14 h-14 bg-gray-800 hover:bg-gray-900 text-white rounded-xl flex items-center justify-center transition-all duration-200 shadow-xl hover:shadow-xl hover:-translate-y-1"
                 href='https://github.com/Gallie83/'
                 target='_blank'
                 rel='noopener noreferrer'
@@ -39,7 +40,7 @@ function About() {
 
               {/* LinkedIn Button */}
               <a 
-                className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-lg flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg hover:-translate-y-1"
+                className="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-xl flex items-center justify-center transition-all duration-200 shadow-xl hover:shadow-xl hover:-translate-y-1"
                 href='https://www.linkedin.com/in/kevin-gallagher-81a294236/'
                 target='_blank'
                 rel='noopener noreferrer'
@@ -52,7 +53,7 @@ function About() {
           </div>
 
           {/* Right section - Single Card */}
-          <div className="md:col-span-2 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-lg space-y-6 md:h-full">
+          <div className="xl:col-span-2 bg-white/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl space-y-6 xl:h-full">
             {/* About text */}
             <div className="space-y-4 text-gray-700 leading-relaxed text-base">
               <p className="font-medium">
@@ -77,7 +78,7 @@ function About() {
                 <span className="w-1 h-4 bg-[#FB8B24] rounded-full"></span>
                 Experience
               </h3>
-              <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+              <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
                 <div className="flex justify-between items-start gap-4 mb-1">
                   <div>
                     <h4 className="font-semibold text-[#983122] text-sm">Full Stack Developer</h4>
@@ -101,11 +102,11 @@ function About() {
                 Education
               </h3>
               <div className="space-y-2">
-                <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
                   <h4 className="font-semibold text-[#983122] text-sm">AI Certification</h4>
                   <p className="text-xs text-gray-600 mt-0.5">BrainStation • Graduated April 2025</p>
                 </div>
-                <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
                   <h4 className="font-semibold text-[#983122] text-sm">Diploma in Full-Stack Development</h4>
                   <p className="text-xs text-gray-600 mt-0.5">University College of Dublin • Graduated May 2023</p>
                 </div>
