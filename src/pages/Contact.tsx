@@ -6,7 +6,7 @@ function Contact() {
         {/* Header Section - Left Aligned */}
         <div className="mb-12">
           <h1 className="text-5xl font-bold text-white mb-4">Contact Me</h1>
-          <div className="h-1 w-24 bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] rounded-full"></div>
+          <div className="h-1 w-24 bg-gradient-to-r from-[var(--color-secondary)] to-[#FF6B35] rounded-full"></div>
         </div>
 
         {/* Centered Content */}
@@ -49,7 +49,7 @@ function Contact() {
               {/* Name and Email */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-[#983122] mb-2">
+                  <label htmlFor="name" className="block text-sm font-semibold text-[var(--color-main)] mb-2">
                     Name
                   </label>
                   <input
@@ -57,12 +57,12 @@ function Contact() {
                     id="name"
                     name="name"
                     placeholder="Name"
-                    className="w-full px-4 py-3 rounded-lg border border-orange-200 focus:border-[#FB8B24] focus:ring-2 focus:ring-[#FB8B24]/20 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-lg border border-orange-200 focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 outline-none transition-all"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-[#983122] mb-2">
+                  <label htmlFor="email" className="block text-sm font-semibold text-[var(--color-main)] mb-2">
                     Email
                   </label>
                   <input
@@ -70,14 +70,14 @@ function Contact() {
                     id="email"
                     name="email"
                     placeholder="Email"
-                    className="w-full px-4 py-3 rounded-lg border border-orange-200 focus:border-[#FB8B24] focus:ring-2 focus:ring-[#FB8B24]/20 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-lg border border-orange-200 focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 outline-none transition-all"
                   />
                 </div>
               </div>
 
               {/* Message */}
               <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-[#983122] mb-2">
+                <label htmlFor="message" className="block text-sm font-semibold text-[var(--color-main)] mb-2">
                   Message
                 </label>
                 <textarea
@@ -85,14 +85,14 @@ function Contact() {
                   name="message"
                   rows={6}
                   placeholder="Message"
-                  className="w-full px-4 py-3 rounded-lg border border-orange-200 focus:border-[#FB8B24] focus:ring-2 focus:ring-[#FB8B24]/20 outline-none transition-all resize-none"
+                  className="w-full px-4 py-3 rounded-lg border border-orange-200 focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 outline-none transition-all resize-none"
                 />
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] hover:from-[#FF6B35] hover:to-[#FB8B24] text-white font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
+                className="w-full bg-gradient-to-r from-[var(--color-secondary)] to-[#FF6B35] hover:from-[#FF6B35] hover:to-[var(--color-secondary)] text-white font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
               >
                 Send message
               </button>

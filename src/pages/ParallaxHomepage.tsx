@@ -380,8 +380,8 @@ function ParallaxHomepage() {
       key={screenType}  // Forces re-initialization when screen type changes
       ref={parallaxRef} 
       pages={totalPages} 
-      style={{ top: '0', left: '0' }} 
-      className='animation bg-[#983122]'
+        style={{ top: '0', left: '0'}} 
+      className='animation bg-[var(--color-main)]'
     >      
       {/* Navigation */}
       <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: totalPages}}>

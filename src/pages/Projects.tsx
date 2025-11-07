@@ -68,7 +68,7 @@ const skills = [
         {/* Header Section */}
         <div className="mb-5">
           <h1 className="text-5xl font-bold text-white mb-4">My Projects</h1>
-          <div className="h-1 w-24 bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] rounded-full mb-3"></div>
+          <div className="h-1 w-24 bg-gradient-to-r from-[var(--color-secondary)] to-[#FF6B35] rounded-full mb-3"></div>
           <span className="text-white/80 italic text-sm">*All projects listed use Git for version control</span>
         </div>
         
@@ -76,8 +76,8 @@ const skills = [
         <div className="mb-5">
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-orange-100">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-semibold text-[#983122] flex items-center gap-2">
-                <span className="w-1.5 h-6 bg-[#FB8B24] rounded-full"></span>
+              <h2 className="text-xl font-semibold text-[var(--color-main)] flex items-center gap-2">
+                <span className="w-1.5 h-6 bg-[var(--color-secondary)] rounded-full"></span>
                 Skills
               </h2>
               {selectedSkill && (
@@ -86,7 +86,7 @@ const skills = [
                     setSelectedSkill(null);
                     setFilteredProjects(projectData);
                   }}
-                  className="text-sm text-[#FB8B24] hover:text-[#FF6B35] font-medium transition-colors"
+                  className="text-sm text-[var(--color-secondary)] hover:text-[#FF6B35] font-medium transition-colors"
                 >
                   Clear filter
                 </button>
@@ -100,8 +100,8 @@ const skills = [
                   onClick={() => handleSkillClick(name)}
                   className={`px-4 py-2 rounded-lg hover:cursor-pointer transition-all duration-200 shadow-sm hover:shadow-md ${
                     selectedSkill === name
-                      ? "bg-[#983122] text-white hover:bg-[#7a271b]"
-                      : "bg-white text-gray-700 border border-orange-200 hover:bg-orange-50 hover:text-[#983122] hover:border-[#FB8B24]"
+                      ? "bg-[var(--color-main)] text-white hover:bg-[#7a271b]"
+                      : "bg-white text-gray-700 border border-orange-200 hover:bg-orange-50 hover:text-[var(--color-main)] hover:border-[var(--color-secondary)]"
                   }`}
                 >
                   <Icon 
@@ -119,6 +119,15 @@ const skills = [
         
         {/* Projects section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+
+          {selectedSkill && (
+            <div className="mb-6">
+              <p className="text-sm text-white">
+                Showing projects using: <span className="font-medium">{selectedSkill}</span>
+              </p>
+            </div>
+          )}
+
           {filteredProjects.map((project, index) => (
             <div 
               className="transition-transform hover:scale-105 hover:cursor-pointer" 

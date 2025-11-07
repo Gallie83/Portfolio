@@ -40,10 +40,10 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center p-4" 
         onClick={onClose}>
           <Card 
-            className="flex flex-col bg-gradient-to-r from-[#FB8B24] to-[#983122] p-0 border-[#983122] w-full max-w-6xl max-h-[95vh] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.3)]" 
+            className="flex flex-col bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-main)] p-0 border-[var(--color-main)] w-full max-w-6xl max-h-[95vh] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.3)]" 
             onClick={(e) => e.stopPropagation()}>
             {/* Header with title, links, tags and close button */}
-            <CardHeader className="bg-[#983122] p-3 !pb-0 flex-shrink-0">
+            <CardHeader className="bg-[var(--color-main)] p-3 !pb-0 flex-shrink-0">
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
                   <CardTitle className="text-2xl md:text-3xl xl:text-4xl font-bold text-white mb-3 md:mb-4">{project.name}</CardTitle>
@@ -80,7 +80,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 items-center">
                       {project.tags.map((tag, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs md:text-sm py-1 px-2 md:px-3 bg-white/90 text-[#983122] border border-orange-200 hover:text-white hover:bg-[#983122]">
+                        <Badge key={index} variant="secondary" className="text-xs md:text-sm py-1 px-2 md:px-3 bg-white/90 text-[var(--color-main)] border border-orange-200 hover:text-white hover:bg-[var(--color-main)]">
                           {tag}
                         </Badge>
                       ))}
@@ -111,7 +111,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 </div>
                 
                 {/* Description */}
-                <div className="bg-[#983122] p-4 space-y-4">
+                <div className="bg-[var(--color-main)] p-4 space-y-4">
                   {/* Description */}
                   <div className="space-y-2">
                     <h3 className="text-base font-bold text-white border-b border-gray-200 pb-2">Description</h3>
@@ -138,7 +138,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 />
                 
                 {/* Sliding description overlay */}
-                <div className={`absolute bottom-0 left-0 right-0 text-white bg-[#983122] bg-opacity-95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out ${
+                <div className={`absolute bottom-0 left-0 right-0 text-white bg-[var(--color-main)] bg-opacity-95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out ${
                   showDescription ? 'translate-y-0' : 'translate-y-full'
                 }`}>
                   <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
@@ -161,7 +161,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 {/* Description toggle button - desktop only */}
                 <button
                   onClick={() => setShowDescription(!showDescription)}
-                  className={`absolute left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] hover:from-[#FF6B35] hover:to-[#FB8B24] text-white px-6 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-110 hover:cursor-pointer flex items-center gap-2 z-20 font-semibold ${
+                  className={`absolute left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-[var(--color-secondary)] to-[#FF6B35] hover:from-[#FF6B35] hover:to-[var(--color-secondary)] text-white px-6 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-110 hover:cursor-pointer flex items-center gap-2 z-20 font-semibold ${
                     showDescription ? 'top-[0vh]' : 'top-[50vh] xl:top-[65vh] 2xl:top-[55vh] [@media(min-width:1800px)]:top-[45vh]'
                   }`}
                 >

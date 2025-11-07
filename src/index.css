@@ -47,6 +47,9 @@
 }
 
 :root {
+  --color-main: #983122;
+  --color-secondary: #fb8b24;
+
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

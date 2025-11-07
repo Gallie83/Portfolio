@@ -6,7 +6,7 @@ function About() {
       <div className="max-w-7xl mx-auto">
 
         <h1 className="text-5xl font-bold text-white mb-4">About Me</h1>
-        <div className="h-1 w-24 bg-gradient-to-r from-[#FB8B24] to-[#FF6B35] rounded-full mb-3"></div>
+        <div className="h-1 w-24 bg-gradient-to-r from-[var(--color-secondary)] to-[#FF6B35] rounded-full mb-3"></div>
         <div className="grid xl:grid-cols-3 gap-6 lg:h-[85vh] xl:h-[75vh] 2xl:h-[70vh]">
 
           
@@ -21,8 +21,8 @@ function About() {
             </div>
             
             <div>
-              <h2 className="text-2xl font-bold text-[#983122] mb-2">Kevin Gallagher</h2>
-              <p className="text-xl text-[#FB8B24] font-medium mb-1">Full Stack Developer</p>
+              <h2 className="text-2xl font-bold text-[var(--color-main)] mb-2">Kevin Gallagher</h2>
+              <p className="text-xl text-[var(--color-secondary)] font-medium mb-1">Full Stack Developer</p>
             </div>
 
             <div className="flex gap-4 pt-2">
@@ -74,14 +74,14 @@ function About() {
             
             {/* Experience */}
             <div>
-              <h3 className="text-base font-bold text-[#983122] mb-2 flex items-center gap-2">
-                <span className="w-1 h-4 bg-[#FB8B24] rounded-full"></span>
+              <h3 className="text-base font-bold text-[var(--color-main)] mb-2 flex items-center gap-2">
+                <span className="w-1 h-4 bg-[var(--color-secondary)] rounded-full"></span>
                 Experience
               </h3>
               <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
                 <div className="flex justify-between items-start gap-4 mb-1">
                   <div>
-                    <h4 className="font-semibold text-[#983122] text-sm">Full Stack Developer</h4>
+                    <h4 className="font-semibold text-[var(--color-main)] text-sm">Full Stack Developer</h4>
                     <p className="text-gray-600 text-xs">Canadian Start-up</p>
                   </div>
                   <span className="text-xs text-gray-500 whitespace-nowrap">Jan 2024 - Jan 2025</span>
@@ -97,17 +97,17 @@ function About() {
             
             {/* Education */}
             <div>
-              <h3 className="text-base font-bold text-[#983122] mb-2 flex items-center gap-2">
-                <span className="w-1 h-4 bg-[#FB8B24] rounded-full"></span>
+              <h3 className="text-base font-bold text-[var(--color-main)] mb-2 flex items-center gap-2">
+                <span className="w-1 h-4 bg-[var(--color-secondary)] rounded-full"></span>
                 Education
               </h3>
               <div className="space-y-2">
                 <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-                  <h4 className="font-semibold text-[#983122] text-sm">AI Certification</h4>
+                  <h4 className="font-semibold text-[var(--color-main)] text-sm">AI Certification</h4>
                   <p className="text-xs text-gray-600 mt-0.5">BrainStation • Graduated April 2025</p>
                 </div>
                 <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-                  <h4 className="font-semibold text-[#983122] text-sm">Diploma in Full-Stack Development</h4>
+                  <h4 className="font-semibold text-[var(--color-main)] text-sm">Diploma in Full-Stack Development</h4>
                   <p className="text-xs text-gray-600 mt-0.5">University College of Dublin • Graduated May 2023</p>
                 </div>
               </div>
