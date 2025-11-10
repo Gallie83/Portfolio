@@ -40,18 +40,18 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
         className="fixed inset-0 z-50 backdrop-blur-sm flex items-center justify-center p-4" 
         onClick={onClose}>
           <Card 
-            className="flex flex-col bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-main)] p-0 border-[var(--color-main)] w-full max-w-6xl max-h-[95vh] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.3)]" 
+            className="flex flex-col bg-gradient-to-r from-[var(--color-secondary)] to-[var(--color-main)] p-0 w-full max-w-6xl max-h-[95vh] overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.3)]" 
             onClick={(e) => e.stopPropagation()}>
             {/* Header with title, links, tags and close button */}
-            <CardHeader className="bg-[var(--color-main)] p-3 !pb-0 flex-shrink-0">
+            <CardHeader className="bg-white text-[var(--color-main)] p-3 !pb-0 flex-shrink-0">
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
-                  <CardTitle className="text-2xl md:text-3xl xl:text-4xl font-bold text-white mb-3 md:mb-4">{project.name}</CardTitle>
+                  <CardTitle className="text-2xl md:text-3xl xl:text-4xl font-bold mb-3 md:mb-4">{project.name}</CardTitle>
                   
                   <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                   {/* Links */}
                   <div className="space-y-2">
-                    <div className="flex text-white items-center text-sm">
+                    <div className="flex items-center text-sm">
                       {/* Only display Live Demo link if website is live */}
                       {project.url && (
                         <a 
@@ -80,7 +80,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 items-center">
                       {project.tags.map((tag, index) => (
-                        <Badge key={index} variant="secondary" className="text-xs md:text-sm py-1 px-2 md:px-3 bg-white/90 text-[var(--color-main)] border border-orange-200 hover:text-white hover:bg-[var(--color-main)]">
+                        <Badge key={index} variant="secondary" className="text-xs md:text-sm py-1 px-2 md:px-3 bg-white/90 text-[var(--color-main)] border border-[var(--color-main)] hover:text-white hover:bg-[var(--color-main)] hover:cursor-default">
                           {tag}
                         </Badge>
                       ))}
@@ -90,7 +90,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 
                 <button 
                   onClick={onClose}
-                  className="text-white/80 hover:text-white hover:bg-white/20 hover:cursor-pointer rounded-full p-2 transition-all duration-200 ml-2 md:ml-4 flex-shrink-0"
+                  className="hover:bg-[var(--color-secondary)] hover:text-[var(--color-main)] hover:cursor-pointer rounded-full p-2 transition-all duration-200 ml-2 md:ml-4 flex-shrink-0"
                 >
                   ✕
                 </button>
