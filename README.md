@@ -16,4 +16,16 @@ While watching another beautiful sunset at english bay, something about the colo
 
 So I contacted an artist on Fiverr - [Ibrahim](https://www.fiverr.com/users/boimwoim/portfolio?roleIds=), who I felt could capture the style I was envisioning. After a couple tweaks and revisions we had the finished homepage image to be used on my homepage, with each element as it's own SVG layer to achieve the parallax effect.
 
-![Homepage Image](readme-assets/homepage-design.jpg)
+![Homepage Image](readme-assets/homepage-design.png)
+
+## Technologies Used
+
+- [React](https://react.dev/) - JavaScript library for building the user interface
+- [TypeScript](https://www.typescriptlang.org/) - Type-safe JavaScript for improved development experience
+- [Vite](https://vitejs.dev/) - Fast build tool and development server
+- [Tailwind CSS](https://tailwindcss.com/) - CSS framework for styling
+- [shadcn/ui](https://ui.shadcn.com/) - Reusable component library
+- [react-spring/parallax](https://www.react-spring.dev/) - Animation library for the parallax scrolling effect
+- [GSAP](https://gsap.com/) - Animation library for smooth scroll navigation
+- [Git](https://git-scm.com/) - Version control
+- [GitHub](https://github.com/) - Repository hosting and version control
