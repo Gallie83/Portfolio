@@ -1,6 +1,5 @@
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog"
@@ -114,12 +113,12 @@ function About() {
 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:scale-105">
+                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:bg-[var(--color-secondary)]">
                       <h4 className="font-semibold text-[var(--color-main)] text-sm">Diploma in Full-Stack Development</h4>
                       <p className="text-xs text-gray-600 mt-0.5">University College of Dublin • Graduated May 2023</p>
                     </div>
                   </DialogTrigger>
-                  <DialogContent className="w-7xl">
+                  <DialogContent>
                     <img 
                       className="w-full" 
                       src={`${basePath}assets/about-assets/UCD-Certificate.png`} 
@@ -129,7 +128,7 @@ function About() {
 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:scale-105">
+                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:bg-[var(--color-secondary)]">
                       <h4 className="font-semibold text-[var(--color-main)] text-sm">AI Certification</h4>
                       <p className="text-xs text-gray-600 mt-0.5">BrainStation • Graduated April 2025</p>
                     </div>
