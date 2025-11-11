@@ -1,6 +1,14 @@
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
 function About() {
 
-  const basePath = import.meta.env.BASE_URL
+  const basePath = import.meta.env.BASE_URL;
+
   return (
     <div className="md:min-h-screen px-6 py-12 md:px-12">
       <div className="max-w-7xl mx-auto">
@@ -16,7 +24,7 @@ function About() {
             <div className="relative">
               <div 
                 className="w-56 h-56 xl:w-60 xl:h-60 rounded-full bg-cover bg-center shadow-xl ring-4 ring-orange-200"
-                style={{ backgroundImage: `url(${basePath}assets/other-assets/linkdin.jpg)` }}
+                style={{ backgroundImage: `url(${basePath}assets/about-assets/linkdin.jpg)` }}
               ></div>
             </div>
             
@@ -101,15 +109,38 @@ function About() {
                 <span className="w-1 h-4 bg-[var(--color-secondary)] rounded-full"></span>
                 Education
               </h3>
+
               <div className="space-y-2">
-                <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-                  <h4 className="font-semibold text-[var(--color-main)] text-sm">AI Certification</h4>
-                  <p className="text-xs text-gray-600 mt-0.5">BrainStation • Graduated April 2025</p>
-                </div>
-                <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-                  <h4 className="font-semibold text-[var(--color-main)] text-sm">Diploma in Full-Stack Development</h4>
-                  <p className="text-xs text-gray-600 mt-0.5">University College of Dublin • Graduated May 2023</p>
-                </div>
+
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:scale-105">
+                      <h4 className="font-semibold text-[var(--color-main)] text-sm">Diploma in Full-Stack Development</h4>
+                      <p className="text-xs text-gray-600 mt-0.5">University College of Dublin • Graduated May 2023</p>
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent className="w-7xl">
+                    <img 
+                      className="w-full" 
+                      src={`${basePath}assets/about-assets/UCD-Certificate.png`} 
+                      alt="UCD Certificate for Full Stack Software Development" />
+                  </DialogContent>
+                </Dialog>
+
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:scale-105">
+                      <h4 className="font-semibold text-[var(--color-main)] text-sm">AI Certification</h4>
+                      <p className="text-xs text-gray-600 mt-0.5">BrainStation • Graduated April 2025</p>
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <img 
+                      className="w-full" 
+                      src={`${basePath}assets/about-assets/Brainstation-Certificate.jpg`} 
+                      alt="BrainStation Certificate for Artificial Intelligence" />
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
           </div>

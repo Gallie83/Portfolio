@@ -19,7 +19,6 @@ export function ProjectCard({ project }: { project: Project }) {
   // Sets images for each project
   const imagePath = basePath + "assets/data-assets/" + project.name.trim().replace(/\s+/g, '') + ".png";
 
-
   return (
     <Card className="w-full overflow-hidden flex flex-col h-full p-0">
         <div className="relative w-full pt-[56.25%]">
