@@ -113,7 +113,7 @@ function About() {
 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:bg-[var(--color-secondary)] hover:-translate-y-1">
+                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:bg-orange-50 hover:border-[var(--color-main)] hover:-translate-y-1">
                       <h4 className="font-semibold text-[var(--color-main)] text-sm">Diploma in Full-Stack Development</h4>
                       <p className="text-xs text-gray-600 mt-0.5">University College of Dublin • Graduated May 2023</p>
                     </div>
@@ -128,7 +128,7 @@ function About() {
 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:bg-[var(--color-secondary)] hover:-translate-y-1">
+                    <div className="bg-gray-50 rounded-xl p-3 border border-gray-200 transition-transform hover:cursor-pointer hover:bg-orange-50 hover:border-[var(--color-main)] hover:-translate-y-1">
                       <h4 className="font-semibold text-[var(--color-main)] text-sm">AI Certification</h4>
                       <p className="text-xs text-gray-600 mt-0.5">BrainStation • Graduated April 2025</p>
                     </div>

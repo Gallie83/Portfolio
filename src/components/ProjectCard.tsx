@@ -41,16 +41,20 @@ export function ProjectCard({ project }: { project: Project }) {
         <div className="space-y-2">
           <div className="text-sm font-medium text-muted-foreground">Links</div>
           <div className="flex items-center">
-            <a 
+
+            {/* Only show link if website is live */}
+            {project.url && 
+              <a 
               href={project.url} 
               target="_blank" 
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm hover:underline"
-            >
-              <GlobeIcon className="h-4 w-4 text-muted-foreground" />
-              <span className="transition-transform hover:scale-105">Live Demo</span>
-            </a>
-            <span className="mx-2 text-gray-400">•</span>
+              >
+                <GlobeIcon className="h-4 w-4 text-muted-foreground" />
+                <span className="transition-transform hover:scale-105">Live Demo</span>
+              </a>
+            }
+            {project.url && (<span className="mx-2">•</span>)}
             <a 
               href={project.github} 
               target="_blank" 

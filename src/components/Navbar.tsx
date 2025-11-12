@@ -24,7 +24,7 @@ function Navbar({ onNavigate, changeNavbarColor }: NavbarProps) {
           <li className="relative flex items-center justify-center">
             <button 
               onClick={() => onNavigate('home')} 
-              className={`${textColor} hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3`}
+              className={`${textColor} ${changeNavbarColor ? 'hover:text-orange-500' : 'hover:text-white'} hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3`}
             >
               <Home size={24}/>
               <span className="whitespace-nowrap">
@@ -37,7 +37,7 @@ function Navbar({ onNavigate, changeNavbarColor }: NavbarProps) {
           <li className="relative flex items-center justify-center">
             <button 
               onClick={() => onNavigate('about')} 
-              className={`${textColor} hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3`}
+              className={`${textColor} ${changeNavbarColor ? 'hover:text-orange-500' : 'hover:text-white'} hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3`}
             >
               <User size={24}/>
               <span className="whitespace-nowrap">
@@ -50,7 +50,7 @@ function Navbar({ onNavigate, changeNavbarColor }: NavbarProps) {
           <li className="relative flex items-center justify-center">
             <button 
               onClick={() => onNavigate('projects')} 
-              className={`${textColor} hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3`}
+              className={`${textColor} ${changeNavbarColor ? 'hover:text-orange-500' : 'hover:text-white'} hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3`}
             >
               <FolderOpen size={24}/>
               <span className="whitespace-nowrap">
@@ -63,7 +63,7 @@ function Navbar({ onNavigate, changeNavbarColor }: NavbarProps) {
           <li className="relative flex items-center justify-center">
             <button 
               onClick={() => onNavigate('contact')} 
-              className={`${textColor} hover:text-orange-500 hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3`}
+              className={`${textColor} ${changeNavbarColor ? 'hover:text-orange-500' : 'hover:text-white'} hover:cursor-pointer transition-colors duration-400 font-medium flex items-center justify-center gap-3`}
             >
               <Mail size={24}/>
               <span className="whitespace-nowrap">
