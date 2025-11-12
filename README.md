@@ -14,7 +14,7 @@ While watching another beautiful sunset at english bay, something about the colo
 
 ![English Bay Sunset Image](readme-assets/english-bay-sunset.jpg)
 
-So I contacted an artist on Fiverr - [Ibrahim](https://www.fiverr.com/users/boimwoim/portfolio?roleIds=), who I felt could capture the style I was envisioning. After a couple tweaks and revisions we had the finished homepage image to be used on my homepage, with each element as it's own SVG layer to achieve the parallax effect.
+So I contacted an artist on Fiverr - [Ibrahim](https://www.fiverr.com/users/boimwoim/portfolio?roleIds=), who I felt could capture the style I was envisioning. After a couple tweaks and revisions we had the finished image to be used on my homepage, with each element as it's own SVG layer to achieve the parallax effect.
 
 ![Homepage Image](readme-assets/homepage-design.png)
 

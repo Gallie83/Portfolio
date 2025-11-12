@@ -117,16 +117,16 @@ const skills = [
           </div>
         </div>
         
+        {selectedSkill && (
+          <div className="mb-6 flex">
+            <p className="text-sm text-white">
+              Showing projects using: <span className="font-medium">{selectedSkill}</span>
+            </p>
+          </div>
+        )}
+
         {/* Projects section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-
-          {selectedSkill && (
-            <div className="mb-6">
-              <p className="text-sm text-white">
-                Showing projects using: <span className="font-medium">{selectedSkill}</span>
-              </p>
-            </div>
-          )}
 
           {filteredProjects.map((project, index) => (
             <div 
