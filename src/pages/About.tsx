@@ -68,7 +68,7 @@ function About() {
               </p>
               
               <p className="font-medium">
-                I thrive in collaborative environments and genuinely enjoy connecting with other developers — some of my best projects have come from people I've met at hackathons and through the dev community.
+                I thrive in collaborative environments and genuinely enjoy connecting with other developers, some of my best projects have come from people I've met at hackathons and through the dev community.
               </p>
               
               <p className="font-medium">

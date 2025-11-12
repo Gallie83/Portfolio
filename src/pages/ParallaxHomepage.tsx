@@ -47,6 +47,31 @@ function ParallaxHomepage() {
 
   const homeHeight = 1.05
 
+  const [changeNavbarColor, setChangeNavbarColor] = useState(false);
+
+  // Changes the color of Navbar elements to ensure legibility
+  const navbarColor = (container: HTMLElement) => {
+
+    const scrollY = container.scrollTop;
+    const height = window.innerHeight;
+    const scrollVh = scrollY / height;
+    
+    if(scrollVh < 1) {
+      setChangeNavbarColor(true);
+    } else {
+      setChangeNavbarColor(false);
+    }
+  }
+
+  // Ensures correct Navbar color on mount
+  useEffect(() => {
+    if (!parallaxRef.current) return;
+    const container = parallaxRef.current.container.current;
+    if (!container) return;
+    
+    navbarColor(container);
+  }, []);
+
   // Screen type detection
   const getScreenType = () => {
       const width = window.innerWidth
@@ -322,6 +347,7 @@ function ParallaxHomepage() {
         duration: 3,
         ease: "power2.inOut"
       });
+      setChangeNavbarColor(false);
       return;
     }
     
@@ -341,6 +367,9 @@ function ParallaxHomepage() {
       scrollTop: targetScroll,
       duration: 3,
       ease: "power2.inOut",
+      onUpdate: () => {
+        if(container) navbarColor(container);
+      },
       onComplete: () => {
         console.log(`✅ Scroll complete. Final position: ${container.scrollTop.toFixed(0)}px = ${(container.scrollTop / window.innerHeight).toFixed(2)}vh`);
       }
@@ -380,8 +409,12 @@ function ParallaxHomepage() {
       key={screenType}  // Forces re-initialization when screen type changes
       ref={parallaxRef} 
       pages={totalPages} 
-        style={{ top: '0', left: '0'}} 
+      style={{ top: '0', left: '0'}} 
       className='animation bg-[var(--color-main)]'
+      onScrollCapture={(e) => {
+        const container = e.currentTarget as HTMLElement;
+        navbarColor(container);
+      }}
     >      
       {/* Navigation */}
       <ParallaxLayer className='pointer-events-none' offset={0} sticky={{start: 0, end: totalPages}}>
@@ -390,7 +423,7 @@ function ParallaxHomepage() {
             <MobileNav onNavigate={scrollToSection}/> 
           </div>
           : 
-          <Navbar onNavigate={scrollToSection} />
+          <Navbar onNavigate={scrollToSection} changeNavbarColor={changeNavbarColor} />
         }
       </ParallaxLayer>
     

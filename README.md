@@ -29,3 +29,9 @@ So I contacted an artist on Fiverr - [Ibrahim](https://www.fiverr.com/users/boim
 - [GSAP](https://gsap.com/) - Animation library for smooth scroll navigation
 - [Git](https://git-scm.com/) - Version control
 - [GitHub](https://github.com/) - Repository hosting and version control
+
+## Lighthouse Testing
+
+Despite the custom parallax scrolling effect with multiple animated layers, the website shows excellent performance across all metrics while maintaining an immersive visual experience:
+
+![Lighthouse scores](readme-assets/lighthouse-testing.png)
