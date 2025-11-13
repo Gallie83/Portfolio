@@ -46,8 +46,16 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             <CardHeader className="bg-white text-[var(--color-main)] p-3 !pb-0 flex-shrink-0">
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
-                  <CardTitle className="text-2xl md:text-3xl xl:text-4xl font-bold mb-3 md:mb-4">{project.name}</CardTitle>
                   
+                  <CardTitle className="flex items-center gap-2 md:gap-3 text-2xl md:text-3xl xl:text-4xl font-bold mb-3 md:mb-4">
+                    <span>{project.name}</span>
+                    {project.hackathon && (
+                      <span className="text-xs md:text-sm font-semibold px-2 md:px-3 py-1 bg-orange-100 text-orange-700 rounded-full">
+                        Hackathon
+                      </span>
+                    )}
+                  </CardTitle>
+
                   <div className="flex flex-col sm:flex-row gap-4 md:gap-6">
                   {/* Links */}
                   <div className="space-y-2">

@@ -30,7 +30,17 @@ export function ProjectCard({ project }: { project: Project }) {
         </div>
       <CardHeader>
         <div className="space-y-2">
-          <CardTitle>{project.name}</CardTitle>
+
+          <CardTitle className="flex items-center gap-2">
+            <span>{project.name}</span>
+            
+            {project.hackathon && (
+              <span className="text-xs font-semibold px-2 py-1 bg-orange-100 text-orange-700 rounded-full">
+                Hackathon
+              </span>
+            )}
+          </CardTitle>
+
           <CardDescription className="line-clamp-2">
             {project.description}
           </CardDescription>
