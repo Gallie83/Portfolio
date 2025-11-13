@@ -30,7 +30,7 @@ So I contacted an artist on Fiverr - [Ibrahim](https://www.fiverr.com/users/boim
 
 ## Design Choices
 
-Firstly, a huge thank you to my good friend and amazing designer [Conor Casey](https://www.linkedin.com/in/conor-casey-102/)(Check him out he's awesome) for his input on design choices for this website.
+Firstly, a huge thank you to my good friend and amazing designer [Conor Casey](https://www.linkedin.com/in/conor-casey-102/) (Check him out he's awesome) for his input on design choices for this website.
 
 **Typography**
 The main font chosen was [Inter](https://fonts.google.com/specimen/Inter) from Google Fonts.
@@ -44,12 +44,13 @@ The Colors for the site were dictated by the homescreens parallax landscape (#FF
 
 The website features 2 different Navbars depending on screen size
 
-The Navbar for larger screens will change color depending on the current scroll position with backdrop blur to ensure legibilty.
+The navbar for larger screens will change color depending on the current scroll position with backdrop blur to ensure legibilty.
 
 ![Navbar large](readme-assets/navbar-lg.png)
+
 ![Navbar large black](readme-assets/navbar-lg-blk.png)
 
-For the mobile Navbar I wanted it to be user friendly as possible, so there I decided to model it as a floating action button placed in the bottom right of the screen, closest to most users thumb position.
+For the mobile navbar I wanted it to be user friendly as possible, so there I decided to model it as a floating action button placed in the bottom right of the screen, closest to most users thumb position.
 
 ![Mobile Navbar](readme-assets/mobile-nav.png)
 
