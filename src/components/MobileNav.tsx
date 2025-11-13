@@ -10,7 +10,6 @@ function MobileNav({onNavigate} : MobileNavProps) {
   const [animate, setAnimate] = useState(false)
   
   const handleNavClick = (section: string) => {
-    console.log("Clicked")
     onNavigate(section)
     setMenuOpen(false)
     setAnimate(false)

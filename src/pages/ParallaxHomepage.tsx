@@ -150,62 +150,42 @@ function ParallaxHomepage() {
       const projectsEl = document.getElementById('projects')
       const contactEl = document.getElementById('contact')
 
-    if(aboutEl && projectsEl && contactEl) {
-      // CHECK if Projects has actual content first
-      const projectCards = projectsEl.querySelectorAll('*') 
-      console.log('🔍 Projects children count:', projectCards.length)
+      if(aboutEl && projectsEl && contactEl) {
+        // CHECK if Projects has actual content first
+        const projectCards = projectsEl.querySelectorAll('*') 
 
-      if (projectCards.length < 5) {
-        console.log('⚠️ Projects not ready, retrying in 200ms...')
-        setTimeout(measureSections, 200)
-        return
-      }
+        if (projectCards.length < 5) {
+          setTimeout(measureSections, 200)
+          return
+        }
 
-      const sections = [aboutEl, projectsEl, contactEl]
-      
-      // Remove hidden-scroll class
-      sections.forEach(el => {
-        el.classList.remove('hidden-scroll')
-      })
-
-      // Force full visibility
-      // sections.forEach(el => {
-      //   el.style.opacity = '1'
-      //   el.style.visibility = 'visible'
-      // })
-
-      // Wait for layout
-      requestAnimationFrame(() => {
-        const vh = window.innerHeight
-
-        const aboutHeight = aboutEl.scrollHeight / vh
-        const projectsHeight = projectsEl.scrollHeight / vh
-        const contactHeight = contactEl.scrollHeight / vh
-
-        console.log('📐 Section heights (vh):', {
-          about: aboutHeight.toFixed(2),
-          projects: projectsHeight.toFixed(2),
-          contact: contactHeight.toFixed(2)
+        const sections = [aboutEl, projectsEl, contactEl]
+        
+        // Remove hidden-scroll class
+        sections.forEach(el => {
+          el.classList.remove('hidden-scroll')
         })
 
-        setSectionHeights({
-          about: aboutHeight,
-          projects: projectsHeight,
-          contact: contactHeight,
-        })
+        // Wait for layout
+        requestAnimationFrame(() => {
+          const vh = window.innerHeight
 
-        sections.forEach((el) => {
-          el.classList.add('hidden-scroll')
-        })
+          const aboutHeight = aboutEl.scrollHeight / vh
+          const projectsHeight = projectsEl.scrollHeight / vh
+          const contactHeight = contactEl.scrollHeight / vh
 
-        // Reset visibility
-        // sections.forEach(el => {
-        //   el.style.opacity = ''
-        //   el.style.visibility = ''
-        // })
+          setSectionHeights({
+            about: aboutHeight,
+            projects: projectsHeight,
+            contact: contactHeight,
+          })
 
-        setMeasurementsTaken(true)
-          
+          sections.forEach((el) => {
+            el.classList.add('hidden-scroll')
+          })
+
+          setMeasurementsTaken(true)
+            
         })
       }
     }
@@ -355,14 +335,6 @@ function ParallaxHomepage() {
     const targetVh = homeHeight + (positionInLayer / 2);
     const targetScroll = targetVh * window.innerHeight;
     
-    console.log(`Scrolling to ${section}:`, {
-      layerOffset: homeHeight,
-      positionInLayer: positionInLayer.toFixed(2),
-      targetVh: targetVh.toFixed(2),
-      targetPx: targetScroll.toFixed(0),
-      formula: `${homeHeight} + (${positionInLayer.toFixed(2)} / 2)`
-    });
-    
     gsap.to(container, {
       scrollTop: targetScroll,
       duration: 3,
@@ -370,9 +342,6 @@ function ParallaxHomepage() {
       onUpdate: () => {
         if(container) navbarColor(container);
       },
-      onComplete: () => {
-        console.log(`✅ Scroll complete. Final position: ${container.scrollTop.toFixed(0)}px = ${(container.scrollTop / window.innerHeight).toFixed(2)}vh`);
-      }
     });
   };
 

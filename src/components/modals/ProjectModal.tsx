@@ -32,7 +32,6 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 
   // Sets images for each project
   const imagePath = basePath + "assets/data-assets/" + project.name.trim().replace(/\s+/g, '') + ".png";
-  console.log("IP:", imagePath);
 
   return (
     <Portal>
@@ -46,7 +45,7 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
             <CardHeader className="bg-white text-[var(--color-main)] p-3 !pb-0 flex-shrink-0">
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
-                  
+
                   <CardTitle className="flex items-center gap-2 md:gap-3 text-2xl md:text-3xl xl:text-4xl font-bold mb-3 md:mb-4">
                     <span>{project.name}</span>
                     {project.hackathon && (
