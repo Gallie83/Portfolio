@@ -111,18 +111,18 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 </div>
                 
                 {/* Description */}
-                <div className="bg-[var(--color-main)] p-4 space-y-4">
+                <div className="bg-white text-black p-4 space-y-4">
                   {/* Description */}
                   <div className="space-y-2">
-                    <h3 className="text-base font-bold text-white border-b border-gray-200 pb-2">Description</h3>
-                    <p className="text-white leading-relaxed text-sm">{project.description}</p>
+                    <h3 className="text-base font-bold border-b border-black pb-2">Description</h3>
+                    <p className="leading-relaxed text-sm">{project.description}</p>
                   </div>
 
                   {/* Contribution (if exists) */}
                   {project.contribution && (
                     <div className="space-y-2">
-                      <h3 className="text-base font-bold text-white border-b border-gray-200 pb-2">My Contribution</h3>
-                      <p className="text-white leading-relaxed text-sm">{project.contribution}</p>
+                      <h3 className="text-base font-bold border-b border-black pb-2">My Contribution</h3>
+                      <p className="leading-relaxed text-sm">{project.contribution}</p>
                     </div>
                   )}
                 </div>
@@ -138,20 +138,20 @@ export function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
                 />
                 
                 {/* Sliding description overlay */}
-                <div className={`absolute bottom-0 left-0 right-0 text-white bg-[var(--color-main)] bg-opacity-95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out ${
+                <div className={`absolute bottom-0 left-0 right-0 bg-white/50 text-black backdrop-blur-2xl border-t border-[var(--color-main)] p-5 transform transition-transform duration-300 ease-in-out ${
                   showDescription ? 'translate-y-0' : 'translate-y-full'
                 }`}>
                   <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
                     {/* Description */}
                     <div className="space-y-2">
-                      <h3 className="text-xl font-bold border-b border-gray-200 pb-2">Description</h3>
+                      <h3 className="text-xl font-bold border-b border-black pb-2">Description</h3>
                       <p className="leading-relaxed">{project.description}</p>
                     </div>
 
                     {/* Contribution (if exists) */}
                     {project.contribution && (
                       <div className="space-y-2">
-                        <h3 className="text-xl font-bold border-b border-gray-200 pb-2">My Contribution</h3>
+                        <h3 className="text-xl font-bold border-b border-black pb-2">My Contribution</h3>
                         <p className="leading-relaxed">{project.contribution}</p>
                       </div>
                     )}

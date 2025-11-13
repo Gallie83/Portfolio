@@ -21,7 +21,7 @@ export function ProjectCard({ project }: { project: Project }) {
 
   return (
     <Card className="w-full overflow-hidden flex flex-col h-full p-0">
-        <div className="relative w-full pt-[56.25%]">
+        <div className="relative w-full pt-[56.25%] border-b-2 border-[var(--color-main)]">
           <img
             src={imagePath}
             alt={`${project.name} cover image`}
