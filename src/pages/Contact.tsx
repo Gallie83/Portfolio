@@ -1,4 +1,30 @@
+import emailjs from '@emailjs/browser';
+import { FormEvent, useState } from 'react';
+
 function Contact() {
+  const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID!,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
+      e.target as HTMLFormElement,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY!,
+    ).then(() => {
+      setMessage('Message sent successfully!');
+      (e.target as HTMLFormElement).reset();
+    }).catch((error) => {
+      console.error(error);
+      setMessage('Failed to send message. Please try again.');
+    }).finally(() => {
+      setIsSubmitting(false);
+    });
+  };
+
   return (
     <div className="md:min-h-screen px-6 py-12 md:px-12">
       <div className="max-w-7xl mx-auto">
@@ -21,9 +47,9 @@ function Contact() {
           {/* Social Links */}
           <div className="flex gap-4">
             <a
-              href='https://github.com/Gallie83/'
-              target='_blank'
-              rel='noopener noreferrer'
+              href="https://github.com/Gallie83/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-16 h-16 bg-gray-800 hover:bg-gray-900 text-white rounded-xl flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-1"
               aria-label="GitHub Profile">
               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -32,9 +58,9 @@ function Contact() {
             </a>
 
             <a 
-              href='https://www.linkedin.com/in/kevin-gallagher-81a294236/'
-              target='_blank'
-              rel='noopener noreferrer'
+              href="https://www.linkedin.com/in/kevin-gallagher-81a294236/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-xl flex items-center justify-center transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-1"
               aria-label="LinkedIn Profile">
               <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -45,7 +71,7 @@ function Contact() {
 
           {/* Contact Form */}
           <div className="w-full max-w-2xl bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-orange-100">
-            <form className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name and Email */}
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
@@ -57,6 +83,7 @@ function Contact() {
                     id="name"
                     name="name"
                     placeholder="Name"
+                    required
                     className="w-full px-4 py-3 rounded-lg border border-orange-200 focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 outline-none transition-all"
                   />
                 </div>
@@ -70,6 +97,7 @@ function Contact() {
                     id="email"
                     name="email"
                     placeholder="Email"
+                    required
                     className="w-full px-4 py-3 rounded-lg border border-orange-200 focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 outline-none transition-all"
                   />
                 </div>
@@ -85,23 +113,32 @@ function Contact() {
                   name="message"
                   rows={6}
                   placeholder="Message"
+                  required
                   className="w-full px-4 py-3 rounded-lg border border-orange-200 focus:border-[var(--color-secondary)] focus:ring-2 focus:ring-[var(--color-secondary)]/20 outline-none transition-all resize-none"
                 />
               </div>
 
+              {/* Status Message */}
+              {message && (
+                <div className={`text-center font-medium ${message.includes('success') ? 'text-green-600' : 'text-red-600'}`}>
+                  {message}
+                </div>
+              )}
+
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-[var(--color-secondary)] to-[#FF6B35] hover:from-[#FF6B35] hover:to-[var(--color-secondary)] text-white font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-[var(--color-secondary)] to-[#FF6B35] hover:from-[#FF6B35] hover:to-[var(--color-secondary)] text-white font-semibold py-4 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               >
-                Send message
+                {isSubmitting ? 'Sending...' : 'Send message'}
               </button>
             </form>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Contact
+export default Contact;

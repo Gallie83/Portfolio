@@ -22,7 +22,7 @@
             "name": "Best Buds Florist",
             "description": "Best Buds is a full-stack Django e-commerce application I built for a fictional florist shop. The website features a complete online store with Stripe payment integration, user authentication, and a shopping cart system. Users can browse products, leave reviews, read blog posts, and securely complete purchases with email confirmations. The platform includes admin functionality for product and content management, deployed on Heroku with AWS S3 for media storage. This project demonstrates my ability to build comprehensive e-commerce solutions with real-world payment processing and cloud deployment.",
             "url": "",
-            "github": "https://github.com/Gallie83/Chainwork-Payment",
+            "github": "https://github.com/Gallie83/Best-Buds-Florist",
             "tags": ["Django", "Python", "Bootstrap", "AWS", "PostgreSQL"],
             "hackathon": false
         },
