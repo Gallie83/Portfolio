@@ -1,6 +1,6 @@
 # Welcome to my website! 👋
 
-🌐 [Live Website](https://gallie83.github.io/portfolio/)
+🌐 [Live Website](https://gallie83.github.io/Portfolio/)
 
 The inspiration for this website came mainly from two places, [Firewatch](https://www.firewatchgame.com/) and my favorite place in Vancouver - English Bay.
 

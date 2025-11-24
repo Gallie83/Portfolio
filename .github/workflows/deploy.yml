@@ -25,11 +25,6 @@ jobs:
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
         run: npm run build
 
-      - name: Create redirect folder
-        run: |
-          mkdir -p ./dist/Portfolio
-          cp Portfolio/index.html ./dist/Portfolio/
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
